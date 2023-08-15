@@ -1,0 +1,178 @@
+header {
+    .container {
+        padding: 20px 10px;
+        @include respond-to($large-desktop) {
+            padding: 20px 0;
+        }
+        position: relative;
+        @include flexbox;
+        @include flex-wrap(wrap);
+        @include justify-content(space-between);
+        @include align-items(center);        
+        a.logo {
+            display: block;
+            &:hover {
+                opacity: 0.7;
+            }
+            img {
+                height: 40px;
+                @include respond-to($large-desktop) {
+                    height: 77px;
+                }
+            }
+        }
+        button.mobilebutton {
+            display: block;
+            font-size: 2rem;
+            outline: none;
+            border:none;
+            background: #FFF;
+            -webkit-appearance: none;
+            @include respond-to($large-desktop) {
+                display: none;
+            }
+        }        
+        nav {
+            display: block;            
+            position: relative;
+            @include respond-to($large-desktop) {
+                display: block;
+            }
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                @include respond-to($large-desktop) {
+                    @include flexbox;
+                    @include flex-wrap(wrap);
+                    @include justify-content(flex-end);
+                    @include align-items(center);
+                }
+                li {
+                    margin: 0 0 10px 0;
+                    font-size: 2rem;
+                    font-weight: 600;
+                    position: relative;
+                    @include respond-to($large-desktop) {
+                        margin: 0 0 0 30px;
+                    }
+                    a {
+                        color: $grey;
+                        font-family: $al;
+                        font-weight: 700;
+                        font-style: italic;
+                        padding: 2px;
+                        border-bottom: 1px solid transparent;
+                        &:hover {
+                            color: $orange;
+                        }
+                    }
+                    &.current-menu-item {
+                        a {
+                            color: $orange;
+                            border-bottom: 1px solid $orange;
+                        }
+                    }
+                    ul.sub-menu{
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: -10px;
+                        padding: 10px;
+                        background: #FFF;
+                        z-index: 999;
+                        @include flex-wrap(wrap);
+                        @include justify-content(flex-start);
+                        @include align-items(center);
+                        @include respond-to($phone) {
+                            position: relative;
+                            @include flexbox;
+                            padding: 10px 0 0 20px;
+                        }
+                        li{
+                            margin: 0 0 10px 0;
+                            @include respond-to($phone) {
+                                display: block;
+                                width: 100%;
+                            }
+                        }
+                    }
+                    &:hover{
+                        ul.sub-menu{
+                            @include flexbox;                            
+                        }
+                    }
+                }
+            }
+        }
+        .searchbox {            
+            margin: 0 0 0 20px;
+            border-bottom: 1px solid $grey;
+            padding: 0 0 5px 0;            
+            @include respond-to($phone) {
+                margin: 0 0 20px 0;
+            }
+            form {
+                input {
+                    width: 80%;
+                    border: none;
+                    background: none;
+                    font-size: 1.4rem;
+                    &::placeholder {
+                        font-style: italic;
+                        font-family: $al;
+                    }
+                    @include respond-to($large-desktop) {
+                        width: 100px;
+                    }
+                }
+                button {
+                    font-size: 1.5rem;
+                    border: none;
+                    background: none;
+                    outline: none;
+                    &:hover {
+                        color: $darkgold;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .social {            
+            @include flexbox;
+            @include flex-wrap(wrap);
+            @include justify-content(flex-end);
+            @include align-items(center);
+            @include respond-to($phone) {
+                @include justify-content(flex-start);
+            }
+            a {
+                font-size: 1.8rem;
+                margin: 0 0 0 15px;
+                @include respond-to($phone) {
+                    font-size: 3rem;
+                }
+            }
+        }
+        .col {
+            &:last-child {
+                @include respond-to($phone) {
+                    display: none;       
+                    width: 100%;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    padding: 0 10px 20px 10px;
+                    z-index: 999;
+                    background: #FFF;             
+                }                
+                @include flex-wrap(wrap);
+                @include justify-content(flex-end);
+                @include align-items(center);
+                @include respond-to($large-desktop) {
+                    @include flexbox;
+                }
+            }
+        }
+    }
+}

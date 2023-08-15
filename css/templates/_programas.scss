@@ -1,0 +1,25 @@
+main.programas{  
+  &.parent-page{
+    margin: 0; padding: 0;    
+  } 
+  section.container{
+    h1{
+      color: #FFF;
+      background: $rojo;
+      padding: 20px 20px 15px;
+      font-size: 4rem;
+      line-height: 1;
+      font-family: $avblack;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+  }  
+  .items-lists-posts{
+    .item{
+      h3{
+        display: none;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

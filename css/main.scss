@@ -1,0 +1,48 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font: 300 10px/1 'Alegreya Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #444;
+}
+
+// @import "../fonts/fonts.css";
+@import "lib/fontawesome/css/all.css";
+@import "_clear.scss";
+@import "_misc";
+@import "_wpcore";
+@import "_mediaqueries.scss";
+@import "_flexbox.scss";
+@import "_typography.scss";
+@import "_mixins.scss";
+
+/*------------------------------------*\
+    STRUCTURE
+\*------------------------------------*/
+
+@import "templates/_commons.scss";
+@import "templates/_items.scss";
+@import "templates/_header.scss";
+@import "templates/_home.scss";
+@import "templates/_archive.scss";
+@import "templates/_single.scss";
+@import "templates/_pages.scss";
+@import "templates/_programas.scss";
+@import "templates/_live.scss";
+@import "templates/_programacion.scss";
+@import "templates/_aside.scss";
+@import "templates/_footer.scss";
+// MIXINS
+.container {
+    width: 100%;
+    margin: 0 auto;
+    @include respond-to($large-desktop) {
+        width: 1200px;
+    }
+    @include respond-to($extra-large-desktop) {
+        width: 1284px;
+    }
+}

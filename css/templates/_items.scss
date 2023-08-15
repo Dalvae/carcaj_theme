@@ -1,0 +1,122 @@
+.items-lists-posts{
+  @include flexbox;
+  @include flex-wrap(wrap);
+  @include justify-content(flex-start);
+  @include align-items(center);
+  .item{
+    width: 100%;
+    min-height: 300px;
+    @include respond-to($large-desktop) {
+      width: 49%;
+      margin: 0 2% 20px 0;
+      &:nth-child(even){
+        margin: 0 0 20px 0;
+      }
+    }
+    &.full{
+      width: 100%;
+      margin: 0 0 10px 0;
+      @include respond-to($large-desktop) {
+        width: 100%;
+        margin: 0 0 10px 0;        
+      } 
+    }
+    &.third{
+      margin: 0 10px 20px 10px;
+      @include respond-to($large-desktop) {
+        width: 32%;
+        margin: 0 2% 20px 0;
+        &:nth-child(3n){
+          margin: 0 0 20px 0;
+        }
+      } 
+    }
+    &.ads, &.center-ads{
+      @include flexbox;
+      @include flex-wrap(wrap);
+      @include justify-content(center);
+      @include align-items(center);
+      background: $gris;
+    }
+    >a{
+      overflow: hidden;
+      display: block;
+      position: relative;
+      width: 100%;            
+      height: 300px;
+      background: rgba(0, 0, 0 , 0.7);
+      .content{              
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        @include flexbox;
+        @include flex-wrap(wrap);
+        @include justify-content(flex-start);
+        @include align-items(flex-end);
+        color : #FFF;
+        .data{
+          padding: 20px;
+          span.cat{
+            display: table;
+            background: darken($rosado, 10%);
+            color: #FFF;       
+            font-size: 1.25rem;         
+            margin: 0 0 10px 0;
+            padding: 6px 10px;
+            text-transform: uppercase;       
+            @extend %border4;
+            
+          }
+          h3{
+            font-size: 2.4rem;
+            line-height: 1.2;
+            margin: 0;
+            padding: 0;
+          }
+        }              
+      }
+      .thumb{              
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          @extend %transition;
+          @extend %scale;
+        }
+      }
+      .layer{
+        position: absolute;
+        z-index: 2;
+        background: rgba(0, 0, 0, 0.6);
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+      &:hover{
+        .layer{
+          background: rgba(0, 0, 0, 0.3);
+          @extend %transition;              
+        }
+        .data{
+          padding: 20px 20px 25px;
+        }
+        .thumb{
+          @extend %transition;
+          @extend %scale;
+        }
+      }
+    }
+  }
+}
