@@ -1049,9 +1049,8 @@ main.single article .top-post p {
 }
 @media only screen and (min-width: 1280px) {
   main.single article .content-post {
-    display: table;
-    width: 1000px;
-    margin: 30px auto;
+    width: 100%;
+    margin: 2rem auto;
   }
 }
 main.single article .content-post .top {
@@ -2060,19 +2059,4 @@ footer .container .col:last-child .social a {
 }
 footer .container .col:last-child .social a:hover {
   color: #9A7A14;
-}
-
-.container {
-  width: 100%;
-  margin: 0 auto;
-}
-@media only screen and (min-width: 1280px) {
-  .container {
-    width: 1200px;
-  }
-}
-@media only screen and (min-width: 1400px) {
-  .container {
-    width: 1284px;
-  }
 }/*# sourceMappingURL=main.css.map */

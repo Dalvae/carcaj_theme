@@ -49,13 +49,13 @@ body {
 @import "templates/_aside.scss";
 @import "templates/_footer.scss";
 // MIXINS
-.container {
-    width: 100%;
-    margin: 0 auto;
-    @include respond-to($large-desktop) {
-        width: 1200px;
-    }
-    @include respond-to($extra-large-desktop) {
-        width: 1284px;
-    }
-}
+// .container {
+//     width: 100%;
+//     margin: 0 auto;
+//     @include respond-to($large-desktop) {
+//         width: 1200px;
+//     }
+//     @include respond-to($extra-large-desktop) {
+//         width: 1284px;
+//     }
+// }
