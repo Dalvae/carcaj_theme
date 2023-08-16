@@ -6,28 +6,26 @@
 	Theme Support
 \*------------------------------------*/
 
-if (!isset($content_width))
-{
-    $content_width = 900;
+if (!isset($content_width)) {
+	$content_width = 900;
 }
 
-if (function_exists('add_theme_support'))
-{
-    // Add Menu Support
-    add_theme_support('menus');
+if (function_exists('add_theme_support')) {
+	// Add Menu Support
+	add_theme_support('menus');
 
-    // Add Thumbnail Theme Support
-    add_theme_support('post-thumbnails');
-    add_image_size('large', 700, '', true); // Large Thumbnail
-    add_image_size('medium', 250, '', true); // Medium Thumbnail
-    add_image_size('small', 120, '', true); // Small Thumbnail
-    add_image_size('custom-size', 700, 200, true); // Custom Thumbnail Size call using the_post_thumbnail('custom-size');
+	// Add Thumbnail Theme Support
+	add_theme_support('post-thumbnails');
+	add_image_size('large', 700, '', true); // Large Thumbnail
+	add_image_size('medium', 250, '', true); // Medium Thumbnail
+	add_image_size('small', 120, '', true); // Small Thumbnail
+	add_image_size('custom-size', 700, 200, true); // Custom Thumbnail Size call using the_post_thumbnail('custom-size');
 
-    // Enables post and comment RSS feed links to head
-    add_theme_support('automatic-feed-links');
+	// Enables post and comment RSS feed links to head
+	add_theme_support('automatic-feed-links');
 
-    // Localisation Support
-    load_theme_textdomain('html5blank', get_template_directory() . '/languages');
+	// Localisation Support
+	load_theme_textdomain('html5blank', get_template_directory() . '/languages');
 }
 
 /*------------------------------------*\
@@ -38,23 +36,23 @@ if (function_exists('add_theme_support'))
 function html5blank_nav()
 {
 	wp_nav_menu(
-	array(
-		'theme_location'  => 'header-menu',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
+		array(
+			'theme_location'  => 'header-menu',
+			'menu'            => '',
+			'container'       => 'div',
+			'container_class' => 'menu-{menu slug}-container',
+			'container_id'    => '',
+			'menu_class'      => 'menu',
+			'menu_id'         => '',
+			'echo'            => true,
+			'fallback_cb'     => 'wp_page_menu',
+			'before'          => '',
+			'after'           => '',
+			'link_before'     => '',
+			'link_after'      => '',
+			'items_wrap'      => '<ul>%3$s</ul>',
+			'depth'           => 0,
+			'walker'          => ''
 		)
 	);
 }
@@ -63,153 +61,153 @@ function html5blank_nav()
 // Load Styles
 function nedwp_enqueue_assets()
 {
-  if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {    
-    wp_enqueue_style('base', get_template_directory_uri() . '/css/main.css', array(), '1.0.0', 'all');
-    wp_enqueue_style('slick', get_template_directory_uri() . '/css/lib/slick.css', array(), '1.0.0', 'all');
-    
-    wp_enqueue_script('scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.1.2');
-    wp_enqueue_script('slick', get_template_directory_uri() . '/js/lib/slick.min.js', array('jquery'), '1.1.2');
-  }
+
+	wp_enqueue_style('base', get_template_directory_uri() . '/css/main.css', array(), '1.0.0', 'all');
+	wp_enqueue_style('slick', get_template_directory_uri() . '/css/lib/slick.css', array(), '1.0.0', 'all');
+
+	wp_enqueue_script('scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.1.2');
+	wp_enqueue_script('slick', get_template_directory_uri() . '/js/lib/slick.min.js', array('jquery'), '1.1.2');
 }
 
 
 // REMOVE SHORTLINK
-add_filter( 'get_shortlink', 'disable_stuff' );
-function disable_stuff( $data ) {
-return false;
+add_filter('get_shortlink', 'disable_stuff');
+function disable_stuff($data)
+{
+	return false;
 }
 
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
 function my_wp_nav_menu_args($args = '')
 {
-    $args['container'] = false;
-    return $args;
+	$args['container'] = false;
+	return $args;
 }
 
 // Remove Injected classes, ID's and Page ID's from Navigation <li> items
 function my_css_attributes_filter($var)
 {
-    return is_array($var) ? array() : '';
+	return is_array($var) ? array() : '';
 }
 
 // Remove invalid rel attribute values in the categorylist
 function remove_category_rel_from_category_list($thelist)
 {
-    return str_replace('rel="category tag"', 'rel="tag"', $thelist);
+	return str_replace('rel="category tag"', 'rel="tag"', $thelist);
 }
 
 // Add page slug to body class, love this - Credit: Starkers Wordpress Theme
 function add_slug_to_body_class($classes)
 {
-    global $post;
-    if (is_home()) {
-        $key = array_search('blog', $classes);
-        if ($key > -1) {
-            unset($classes[$key]);
-        }
-    } elseif (is_page()) {
-        $classes[] = sanitize_html_class($post->post_name);
-    } elseif (is_singular()) {
-        $classes[] = sanitize_html_class($post->post_name);
-    }
+	global $post;
+	if (is_home()) {
+		$key = array_search('blog', $classes);
+		if ($key > -1) {
+			unset($classes[$key]);
+		}
+	} elseif (is_page()) {
+		$classes[] = sanitize_html_class($post->post_name);
+	} elseif (is_singular()) {
+		$classes[] = sanitize_html_class($post->post_name);
+	}
 
-    return $classes;
+	return $classes;
 }
 
 // Remove wp_head() injected Recent Comment styles
 function my_remove_recent_comments_style()
 {
-    global $wp_widget_factory;
-    remove_action('wp_head', array(
-        $wp_widget_factory->widgets['WP_Widget_Recent_Comments'],
-        'recent_comments_style'
-    ));
+	global $wp_widget_factory;
+	remove_action('wp_head', array(
+		$wp_widget_factory->widgets['WP_Widget_Recent_Comments'],
+		'recent_comments_style'
+	));
 }
 
 // Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
 function html5wp_pagination()
 {
-    global $wp_query;
-    $big = 999999999;
-    echo paginate_links(array(
-        'base' => str_replace($big, '%#%', get_pagenum_link($big)),
-        'format' => '?paged=%#%',
-        'current' => max(1, get_query_var('paged')),
-        'total' => $wp_query->max_num_pages
-    ));
+	global $wp_query;
+	$big = 999999999;
+	echo paginate_links(array(
+		'base' => str_replace($big, '%#%', get_pagenum_link($big)),
+		'format' => '?paged=%#%',
+		'current' => max(1, get_query_var('paged')),
+		'total' => $wp_query->max_num_pages
+	));
 }
 
 // Custom Excerpts
 function html5wp_index($length) // Create 20 Word Callback for Index page Excerpts, call using html5wp_excerpt('html5wp_index');
 {
-    return 20;
+	return 20;
 }
 
 // Create 40 Word Callback for Custom Post Excerpts, call using html5wp_excerpt('html5wp_custom_post');
 function html5wp_custom_post($length)
 {
-    return 40;
+	return 40;
 }
 
 // Create the Custom Excerpts callback
 function html5wp_excerpt($length_callback = '', $more_callback = '')
 {
-    global $post;
-    if (function_exists($length_callback)) {
-        add_filter('excerpt_length', $length_callback);
-    }
-    if (function_exists($more_callback)) {
-        add_filter('excerpt_more', $more_callback);
-    }
-    $output = get_the_excerpt();
-    $output = apply_filters('wptexturize', $output);
-    $output = apply_filters('convert_chars', $output);
-    $output = '<p>' . $output . '</p>';
-    echo $output;
+	global $post;
+	if (function_exists($length_callback)) {
+		add_filter('excerpt_length', $length_callback);
+	}
+	if (function_exists($more_callback)) {
+		add_filter('excerpt_more', $more_callback);
+	}
+	$output = get_the_excerpt();
+	$output = apply_filters('wptexturize', $output);
+	$output = apply_filters('convert_chars', $output);
+	$output = '<p>' . $output . '</p>';
+	echo $output;
 }
 
 // Custom View Article link to Post
 function html5_blank_view_article($more)
 {
-    global $post;
-    return '...';
+	global $post;
+	return '...';
 }
 
 // Remove Admin bar
 function remove_admin_bar()
 {
-    return false;
+	return false;
 }
 
 // Remove 'text/css' from our enqueued stylesheet
 function html5_style_remove($tag)
 {
-    return preg_replace('~\s+type=["\'][^"\']++["\']~', '', $tag);
+	return preg_replace('~\s+type=["\'][^"\']++["\']~', '', $tag);
 }
 
 // Remove thumbnail width and height dimensions that prevent fluid images in the_thumbnail
-function remove_thumbnail_dimensions( $html )
+function remove_thumbnail_dimensions($html)
 {
-    $html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
-    return $html;
+	$html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
+	return $html;
 }
 
 // Custom Gravatar in Settings > Discussion
-function html5blankgravatar ($avatar_defaults)
+function html5blankgravatar($avatar_defaults)
 {
-    $myavatar = get_template_directory_uri() . '/img/gravatar.jpg';
-    $avatar_defaults[$myavatar] = "Custom Gravatar";
-    return $avatar_defaults;
+	$myavatar = get_template_directory_uri() . '/img/gravatar.jpg';
+	$avatar_defaults[$myavatar] = "Custom Gravatar";
+	return $avatar_defaults;
 }
 
 // Threaded Comments
 function enable_threaded_comments()
 {
-    if (!is_admin()) {
-        if (is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
-            wp_enqueue_script('comment-reply');
-        }
-    }
+	if (!is_admin()) {
+		if (is_singular() and comments_open() and (get_option('thread_comments') == 1)) {
+			wp_enqueue_script('comment-reply');
+		}
+	}
 }
 
 // Custom Comments Callback
@@ -218,7 +216,7 @@ function html5blankcomments($comment, $args, $depth)
 	$GLOBALS['comment'] = $comment;
 	extract($args, EXTR_SKIP);
 
-	if ( 'div' == $args['style'] ) {
+	if ('div' == $args['style']) {
 		$tag = 'div';
 		$add_below = 'comment';
 	} else {
@@ -226,38 +224,39 @@ function html5blankcomments($comment, $args, $depth)
 		$add_below = 'div-comment';
 	}
 ?>
-    <!-- heads up: starting < for the html tag (li or div) in the next line: -->
-    <<?php echo $tag ?> <?php comment_class(empty( $args['has_children'] ) ? '' : 'parent') ?> id="comment-<?php comment_ID() ?>">
-	<?php if ( 'div' != $args['style'] ) : ?>
-	<div id="div-comment-<?php comment_ID() ?>" class="comment-body">
-	<?php endif; ?>
+	<!-- heads up: starting < for the html tag (li or div) in the next line: -->
+	<<?php echo $tag ?> <?php comment_class(empty($args['has_children']) ? '' : 'parent') ?> id="comment-<?php comment_ID() ?>">
+		<?php if ('div' != $args['style']) : ?>
+			<div id="div-comment-<?php comment_ID() ?>" class="comment-body">
+			<?php endif; ?>
 
-    <div class="comment-text">
-        <?php comment_text() ?>
-    </div>
+			<div class="comment-text">
+				<?php comment_text() ?>
+			</div>
 
-	<div class="comment-author vcard">	
-    <?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
-    
-    <div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
-		<?php
-			printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
-		?>
-	</div>
-	</div>
-<?php if ($comment->comment_approved == '0') : ?>
-	<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
-	<br />
-<?php endif; ?>	
+			<div class="comment-author vcard">
+				<?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
+
+				<div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>">
+						<?php
+						printf(__('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'), '  ', '');
+																						?>
+				</div>
+			</div>
+			<?php if ($comment->comment_approved == '0') : ?>
+				<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
+				<br />
+			<?php endif; ?>
 
 
-	<div class="reply">
-	<?php // comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-	</div>
-	<?php if ( 'div' != $args['style'] ) : ?>
-	</div>
-	<?php endif; ?>
-<?php }
+			<div class="reply">
+				<?php // comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) 
+				?>
+			</div>
+			<?php if ('div' != $args['style']) : ?>
+			</div>
+		<?php endif; ?>
+	<?php }
 
 /*------------------------------------*\
 	Actions + Filters + ShortCodes
@@ -305,69 +304,30 @@ add_filter('user_can_richedit', '__return_true');
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
 
 // Register Custom Taxonomy
-function especiales() {
+function especiales()
+{
 
 	$labels = array(
-		'name'                       => _x( 'Especiales', 'Taxonomy General Name', 'especiales' ),
-		'singular_name'              => _x( 'Especial', 'Taxonomy Singular Name', 'especiales' ),
-		'menu_name'                  => __( 'Especiales', 'especiales' ),
-		'all_items'                  => __( 'All Items', 'especiales' ),
-		'parent_item'                => __( 'Parent Item', 'especiales' ),
-		'parent_item_colon'          => __( 'Parent Item:', 'especiales' ),
-		'new_item_name'              => __( 'Nuevo especial', 'especiales' ),
-		'add_new_item'               => __( 'Agregar', 'especiales' ),
-		'edit_item'                  => __( 'Edit Item', 'especiales' ),
-		'update_item'                => __( 'Update Item', 'especiales' ),
-		'view_item'                  => __( 'View Item', 'especiales' ),
-		'separate_items_with_commas' => __( 'Separate items with commas', 'especiales' ),
-		'add_or_remove_items'        => __( 'Add or remove items', 'especiales' ),
-		'choose_from_most_used'      => __( 'Choose from the most used', 'especiales' ),
-		'popular_items'              => __( 'Popular Items', 'especiales' ),
-		'search_items'               => __( 'Search Items', 'especiales' ),
-		'not_found'                  => __( 'Not Found', 'especiales' ),
-		'no_terms'                   => __( 'No items', 'especiales' ),
-		'items_list'                 => __( 'Items list', 'especiales' ),
-		'items_list_navigation'      => __( 'Items list navigation', 'especiales' ),
-	);
-	$args = array(
-		'labels'                     => $labels,
-		'hierarchical'               => true,
-		'public'                     => true,
-		'show_ui'                    => true,
-		'show_admin_column'          => true,
-		'show_in_nav_menus'          => true,
-        'show_tagcloud'              => true,
-        'show_in_rest'               => true,
-	);
-	register_taxonomy( 'especiales', array( 'post' ), $args );
-
-}
-add_action( 'init', 'especiales', 0 );
-
-// Register Custom Taxonomy
-function year_post() {
-
-	$labels = array(
-		'name'                       => _x( 'Año', 'Taxonomy General Name', 'year_post' ),
-		'singular_name'              => _x( 'Año', 'Taxonomy Singular Name', 'year_post' ),
-		'menu_name'                  => __( 'Año', 'year_post' ),
-		'all_items'                  => __( 'Todos los Años', 'year_post' ),
-		'parent_item'                => __( 'Parent Item', 'year_post' ),
-		'parent_item_colon'          => __( 'Parent Item:', 'year_post' ),
-		'new_item_name'              => __( 'Nuevo Año', 'year_post' ),
-		'add_new_item'               => __( 'Agregar año', 'year_post' ),
-		'edit_item'                  => __( 'Edit Item', 'year_post' ),
-		'update_item'                => __( 'Update Item', 'year_post' ),
-		'view_item'                  => __( 'View Item', 'year_post' ),
-		'separate_items_with_commas' => __( 'Separate items with commas', 'year_post' ),
-		'add_or_remove_items'        => __( 'Add or remove items', 'year_post' ),
-		'choose_from_most_used'      => __( 'Choose from the most used', 'year_post' ),
-		'popular_items'              => __( 'Popular Items', 'year_post' ),
-		'search_items'               => __( 'Search Items', 'year_post' ),
-		'not_found'                  => __( 'Not Found', 'year_post' ),
-		'no_terms'                   => __( 'No items', 'year_post' ),
-		'items_list'                 => __( 'Items list', 'year_post' ),
-		'items_list_navigation'      => __( 'Items list navigation', 'year_post' ),
+		'name'                       => _x('Especiales', 'Taxonomy General Name', 'especiales'),
+		'singular_name'              => _x('Especial', 'Taxonomy Singular Name', 'especiales'),
+		'menu_name'                  => __('Especiales', 'especiales'),
+		'all_items'                  => __('All Items', 'especiales'),
+		'parent_item'                => __('Parent Item', 'especiales'),
+		'parent_item_colon'          => __('Parent Item:', 'especiales'),
+		'new_item_name'              => __('Nuevo especial', 'especiales'),
+		'add_new_item'               => __('Agregar', 'especiales'),
+		'edit_item'                  => __('Edit Item', 'especiales'),
+		'update_item'                => __('Update Item', 'especiales'),
+		'view_item'                  => __('View Item', 'especiales'),
+		'separate_items_with_commas' => __('Separate items with commas', 'especiales'),
+		'add_or_remove_items'        => __('Add or remove items', 'especiales'),
+		'choose_from_most_used'      => __('Choose from the most used', 'especiales'),
+		'popular_items'              => __('Popular Items', 'especiales'),
+		'search_items'               => __('Search Items', 'especiales'),
+		'not_found'                  => __('Not Found', 'especiales'),
+		'no_terms'                   => __('No items', 'especiales'),
+		'items_list'                 => __('Items list', 'especiales'),
+		'items_list_navigation'      => __('Items list navigation', 'especiales'),
 	);
 	$args = array(
 		'labels'                     => $labels,
@@ -379,9 +339,48 @@ function year_post() {
 		'show_tagcloud'              => true,
 		'show_in_rest'               => true,
 	);
-	register_taxonomy( 'anho', array( 'post' ), $args );
-
+	register_taxonomy('especiales', array('post'), $args);
 }
-add_action( 'init', 'year_post', 0 );
+add_action('init', 'especiales', 0);
 
-?>
+// Register Custom Taxonomy
+function year_post()
+{
+
+	$labels = array(
+		'name'                       => _x('Año', 'Taxonomy General Name', 'year_post'),
+		'singular_name'              => _x('Año', 'Taxonomy Singular Name', 'year_post'),
+		'menu_name'                  => __('Año', 'year_post'),
+		'all_items'                  => __('Todos los Años', 'year_post'),
+		'parent_item'                => __('Parent Item', 'year_post'),
+		'parent_item_colon'          => __('Parent Item:', 'year_post'),
+		'new_item_name'              => __('Nuevo Año', 'year_post'),
+		'add_new_item'               => __('Agregar año', 'year_post'),
+		'edit_item'                  => __('Edit Item', 'year_post'),
+		'update_item'                => __('Update Item', 'year_post'),
+		'view_item'                  => __('View Item', 'year_post'),
+		'separate_items_with_commas' => __('Separate items with commas', 'year_post'),
+		'add_or_remove_items'        => __('Add or remove items', 'year_post'),
+		'choose_from_most_used'      => __('Choose from the most used', 'year_post'),
+		'popular_items'              => __('Popular Items', 'year_post'),
+		'search_items'               => __('Search Items', 'year_post'),
+		'not_found'                  => __('Not Found', 'year_post'),
+		'no_terms'                   => __('No items', 'year_post'),
+		'items_list'                 => __('Items list', 'year_post'),
+		'items_list_navigation'      => __('Items list navigation', 'year_post'),
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => true,
+		'show_in_nav_menus'          => true,
+		'show_tagcloud'              => true,
+		'show_in_rest'               => true,
+	);
+	register_taxonomy('anho', array('post'), $args);
+}
+add_action('init', 'year_post', 0);
+
+	?>
