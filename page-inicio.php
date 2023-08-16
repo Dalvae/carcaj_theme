@@ -62,7 +62,7 @@
                     <img src="<?php bloginfo('template_url'); ?>/img/thumb.png" alt="">
                   <?php endif ?>
                   <div class="categories">
-                    <?php the_category(','); ?>
+                    <?php the_category(' '); ?>
                   </div>
                 </a>
               </div>
