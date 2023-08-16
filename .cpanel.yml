@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/tu_usuario/public_html/mi_carpeta
+    - export DEPLOYPATH=/home2/carcajcl/public_html/wp-content/themes/carcaj_theme
     - /bin/cp -R ./* $DEPLOYPATH
