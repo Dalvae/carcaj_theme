@@ -1,3 +1,16 @@
+// VARIABLES
+$orange: #9A7A14;
+$grey: #585858;
+$red: #D22800;
+$blue: #47586A;
+$swhite: #F5F5ED;
+$gold: #D8D4AE;
+$darkgold: #9A7A14;
+$lightgrey: #C2C2C2;
+$op: 'Open Sans';
+$al: 'Alegreya';
+$als: 'Alegreya Sans';
+
 html {
     font-size: 62.5%;
 }
@@ -6,7 +19,7 @@ body {
     margin: 0;
     padding: 0;
     font: 300 10px/1 'Alegreya Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #444;
+    color: #000000;
 }
 
 // @import "../fonts/fonts.css";
