@@ -571,7 +571,7 @@ main.home section.destacados {
         margin: 0;
         padding: 0; }
         main.home section.destacados .sliderHome .row .data h2 a {
-          color: #bf1640; }
+          color: #47586A; }
           main.home section.destacados .sliderHome .row .data h2 a:hover {
             color: #D8D4AE; }
       main.home section.destacados .sliderHome .row .data .extracto p {
@@ -661,7 +661,7 @@ main.home section.articles {
           margin: 10px 0 0 0;
           font-size: 2.4rem;
           line-height: 1.5;
-          color: #882a39; }
+          color: #47586A; }
         main.home section.articles .container .items-list .item .data p {
           font-size: 2.4rem;
           font-family: "Alegreya Sans";
