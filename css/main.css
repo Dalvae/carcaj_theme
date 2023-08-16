@@ -710,11 +710,14 @@ main.home section.articles .container .items-list {
     grid-row-gap: 90px;
   }
 }
+main.home section.articles .container .items-list .item .thumb {
+  position: relative;
+}
+main.home section.articles .container .items-list .item .thumb:hover a {
+  opacity: 0.5;
+}
 main.home section.articles .container .items-list .item .thumb a {
   display: block;
-}
-main.home section.articles .container .items-list .item .thumb a:hover {
-  opacity: 0.7;
 }
 main.home section.articles .container .items-list .item .thumb a img {
   width: 100%;
@@ -727,6 +730,24 @@ main.home section.articles .container .items-list .item .thumb a img {
   main.home section.articles .container .items-list .item .thumb a img {
     max-height: 250px;
   }
+}
+main.home section.articles .container .items-list .item .thumb .categories {
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+}
+main.home section.articles .container .items-list .item .thumb .categories a {
+  margin: 0;
+  font-family: "Alegreya";
+  font-size: 3.2rem;
+  font-weight: 500;
+  display: flex;
+  color: rgb(17, 10, 10);
+  opacity: 0; /* Inicialmente oculto */
+}
+main.home section.articles .container .items-list .item .thumb:hover .categories a {
+  display: block;
+  opacity: 1; /* Mostrar cuando se hace hover */
 }
 main.home section.articles .container .items-list .item .data {
   padding: 12px;

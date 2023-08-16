@@ -26,6 +26,7 @@ main.home {
                             }
                         }
                     }
+
                 }
                 .data {
                     padding: 20px;
@@ -110,12 +111,16 @@ main.home {
                     grid-row-gap: 90px;
                 }
                 .item {
+                 
                     .thumb {
+                        &:hover {
+                            a {
+                                opacity: 0.5;
+                            }
+                        }
+                        position: relative;
                         a {
                             display: block;
-                            &:hover {
-                                opacity: 0.7;
-                            }
                             img {
                                 width: 100%;
                                 height: 100%;
@@ -125,7 +130,32 @@ main.home {
                                     max-height: 250px;
                                 }
                             }
+
                         }
+                    .categories {
+                        position: absolute;
+                        bottom: 40%;
+                        left: 50%;
+                            a{
+                                margin: 0;
+                                // padding: 10px 0;
+                                font-family: $al;
+                                font-size: 3.2rem;
+                                font-weight: 500;
+                                display: flex;
+
+                                color: rgb(17, 10, 10);
+                                // transition: opacity 0.3s;
+                                opacity: 0; /* Inicialmente oculto */
+                              }
+                            
+                            }
+                    &:hover .categories{
+                            a {                                display: block;
+                                opacity: 1; /* Mostrar cuando se hace hover */}
+
+                              }
+                          
                     }
                     .data {
                         padding: 12px;
