@@ -707,11 +707,13 @@ main.home section.articles .container .items-list {
   main.home section.articles .container .items-list {
     grid-template-columns: repeat(3, 4fr);
     grid-column-gap: 12px;
-    grid-row-gap: 90px;
+    grid-row-gap: 9x;
   }
 }
 main.home section.articles .container .items-list .item .thumb {
   position: relative;
+  position: relative;
+  display: block;
 }
 main.home section.articles .container .items-list .item .thumb:hover a {
   opacity: 0.5;
@@ -732,21 +734,24 @@ main.home section.articles .container .items-list .item .thumb a img {
   }
 }
 main.home section.articles .container .items-list .item .thumb .categories {
+  padding: 1rem;
   position: absolute;
-  bottom: 40%;
-  left: 50%;
+  bottom: 0;
+  right: 0;
 }
 main.home section.articles .container .items-list .item .thumb .categories a {
+  text-align: right;
+  align-self: flex-end;
   margin: 0;
   font-family: "Alegreya";
   font-size: 3.2rem;
-  font-weight: 500;
-  display: flex;
+  font-weight: 400;
+  display: block;
+  align-items: end;
   color: rgb(17, 10, 10);
   opacity: 0; /* Inicialmente oculto */
 }
 main.home section.articles .container .items-list .item .thumb:hover .categories a {
-  display: block;
   opacity: 1; /* Mostrar cuando se hace hover */
 }
 main.home section.articles .container .items-list .item .data {

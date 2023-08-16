@@ -108,17 +108,19 @@ main.home {
                 @include respond-to($large-desktop) {
                     grid-template-columns: repeat(3, 4fr);
                     grid-column-gap: 12px;
-                    grid-row-gap: 90px;
+                    grid-row-gap: 9x;
                 }
                 .item {
                  
                     .thumb {
+                        position: relative;
                         &:hover {
                             a {
                                 opacity: 0.5;
                             }
                         }
                         position: relative;
+                        display: block;
                         a {
                             display: block;
                             img {
@@ -133,25 +135,29 @@ main.home {
 
                         }
                     .categories {
+                        // display: flex;
+                        // position: absolute;
+                        padding: 1rem;
                         position: absolute;
-                        bottom: 40%;
-                        left: 50%;
+                        bottom: 0;
+                        right: 0;
                             a{
+                                text-align: right;
+                                align-self: flex-end;
                                 margin: 0;
-                                // padding: 10px 0;
+                                // padding: 1rem;
                                 font-family: $al;
                                 font-size: 3.2rem;
-                                font-weight: 500;
-                                display: flex;
-
+                                font-weight: 400;
+                                display: block;
+                                align-items: end;
                                 color: rgb(17, 10, 10);
                                 // transition: opacity 0.3s;
                                 opacity: 0; /* Inicialmente oculto */
                               }
-                            
                             }
                     &:hover .categories{
-                            a {                                display: block;
+                            a {                                
                                 opacity: 1; /* Mostrar cuando se hace hover */}
 
                               }
