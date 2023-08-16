@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/tu_usuario/public_html/mi_carpeta
+    - /bin/cp -R ./* $DEPLOYPATH
