@@ -1,317 +1,359 @@
 main.home {
-    section.destacados {
-        position: relative;
-        .sliderHome{
-            .row {
-                display: grid;
-                grid-template-columns: 1fr;
-                grid-gap: 12px;
-                background: #F5F5ED;
-                @include respond-to($large-desktop) {
-                    grid-template-columns: 8fr 4fr;
-                }
-                @include respond-to($extra-large-desktop) {
-                    grid-template-columns: 4fr 3fr;
-                    align-items: center;
-                }
-                .thumb {
-                    a {
-                        img {
-                            width: 100%;
-                            max-height: 50vh;
-                            object-fit: cover;
-                            @include respond-to($large-desktop) {
-                                max-height: 50vh;
-                                object-fit: cover;
-                            }
-                        }
-                    }
-
-                }
-                .data {
-                    padding: 2rem;
-                    width: 100%;
-                    height: 320px;
-                    @include respond-to($large-desktop) {
-                        padding: 30px 100px 30px 30px;
-                        height: 100%;
-                    }
-                    h2 {
-                        font-size: 3.2rem;
-                        font-family: $al;
-                        font-weight: 500;
-                        line-height: 1.5;
-                        margin-left: 2rem;
-                        padding: 0;
-                        a {
-                            color: $red;
-                            &:hover {
-                                color: $gold;
-                            }
-                        }
-                    }
-                    .extracto {
-                        p {
-                            font-size: 2.6rem;
-                            line-height: 1.2;
-                            margin-left: 2rem;
-                        }
-                    }
-                    .date {
-                        font-size: 2rem;
-                        margin-left: 2rem;
-                        color: $lightgrey;
-                    }
-                }
+  section.destacados {
+    position: relative;
+    .sliderHome {
+      .row {
+        display: flex;
+        flex: 1;
+        align-items: stretch;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 2rem;
+        background: #f5f5ed;
+        @include respond-to($large-desktop) {
+          .thumb {
+            flex: 1.8;
+            a {
+              max-height: 50rem;
+              align-self: center;
+              flex: 1.8;
+              object-fit: cover;
             }
-        }        
-        .customArrow{
-            position: absolute;
-            top: 50%;
-            color: $red;
-            font-size: 2.5rem;
-            transform: translate(0, -50%);
-            &:hover{
-                cursor: pointer;
-                color: darken($red, 10%);
-            }
-            &.prevArrow{
-                left: 5px;
-            }
-            &.nextArrow{
-                right: 5px;
-            }
+          }
+          .coso {
+            flex: 1.2;
+          }
         }
-    }
-    section.articles {
-        margin: 30px auto 90px;
-        .container {
-            padding: 0 10px;
-            @include respond-to($large-desktop) {
-                padding: 0;
+        @include respond-to($extra-large-desktop) {
+          .thumb {
+            a {
+              flex: 1.8;
+              object-fit: cover;
             }
-            h1{
-                display: table;
-                font-family: $al;
-                font-size: 5.4rem;
-                font-weight: 500;
-                margin: 0 auto;
-                padding: 0 0 70px 0;
-                &.cat{
-                  color: $blue;
+          }
+          .coso {
+            flex: 1.2;
+          }
+        }
+        .thumb {
+          // flex: 1;
+          align-self: center;
+          object-fit: cover;
+          // height: 100%;
+          width: 100%;
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%; // Asegurar que ocupa toda la altura de .thumb
+            width: 100%; //
+            img {
+              align-self: center;
+              justify-content: center;
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+        .data {
+          // padding: 2rem;
+          // width: 100%;
+
+          // @include respond-to($large-desktop) {
+          //     padding: 30px 100px 30px 30px;
+          //     height: 100%;
+          // }
+          // align-items: stretch;
+          h2 {
+            font-size: 3.2rem;
+            font-family: $al;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-left: 2rem;
+            padding: 0;
+            a {
+              color: $red;
+              &:hover {
+                color: $gold;
+              }
+            }
+          }
+          .extracto {
+            p {
+              font-size: 2.6rem;
+              line-height: 1.2;
+              margin-left: 2rem;
+            }
+          }
+          .date {
+            font-size: 2rem;
+            margin-left: 2rem;
+            color: $lightgrey;
+          }
+        }
+        .coso {
+          align-items: stretch;
+          height: 30rem;
+        }
+      }
+    }
+    .customArrow {
+      position: absolute;
+      top: 50%;
+      color: $red;
+      font-size: 2.5rem;
+      transform: translate(0, -50%);
+      &:hover {
+        cursor: pointer;
+        color: darken($red, 10%);
+      }
+      &.prevArrow {
+        left: 5px;
+      }
+      &.nextArrow {
+        right: 5px;
+      }
+    }
+  }
+  section.articles {
+    margin: 30px auto 90px;
+    .container {
+      padding: 0 10px;
+      @include respond-to($large-desktop) {
+        padding: 0;
+      }
+
+      h1 {
+        display: table;
+        font-family: $al;
+        font-size: 5.4rem;
+        font-weight: 500;
+        margin: 0 auto;
+        padding: 0 0 70px 0;
+        &.cat {
+          color: $blue;
+        }
+        &.search {
+          color: $red;
+        }
+      }
+      .items-list {
+        padding: 0 0 90px 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-column-gap: 12px;
+        grid-row-gap: 50px;
+        @include respond-to($large-desktop) {
+          grid-template-columns: repeat(3, 4fr);
+          grid-column-gap: 12px;
+          grid-row-gap: 9x;
+        }
+        .item {
+            &:hover {
+               .thumb{ a {
+                  opacity: 1.4;
+                  img {
+                    filter: brightness(0.5);
+                  }
                 }
-                &.search{
-                  color: $red;
+                .categories {
+                    a {
+                      opacity: 1; /* Mostrar cuando se hace hover */
+                    }
+                  }
                 }
               }
-            .items-list {
-                padding: 0 0 90px 0;
-                display: grid;
-                grid-template-columns: 1fr;
-                grid-column-gap: 12px;
-                grid-row-gap: 50px;
+          .thumb {
+            position: relative;
+            position: relative;
+            display: block;
+            a {
+              display: block;
+              img {
+                transition: filter 0.3s ease;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                max-height: 200px;
                 @include respond-to($large-desktop) {
-                    grid-template-columns: repeat(3, 4fr);
-                    grid-column-gap: 12px;
-                    grid-row-gap: 9x;
+                  max-height: 250px;
                 }
-                .item {
-                 
-                    .thumb {
-                        position: relative;
-                        &:hover {
-                            a {
-                                opacity: 0.5;
-                            }
-                        }
-                        position: relative;
-                        display: block;
-                        a {
-                            display: block;
-                            img {
-                                width: 100%;
-                                height: 100%;
-                                object-fit: cover;
-                                max-height: 200px;
-                                @include respond-to($large-desktop) {
-                                    max-height: 250px;
-                                }
-                            }
-
-                        }
-                    .categories {
-                        // display: flex;
-                        // position: absolute;
-                        padding: 1rem;
-                        position: absolute;
-                        bottom: 0;
-                        right: 0;
-                            a{
-                                text-align: right;
-                                align-self: flex-end;
-                                margin: 0;
-                                // padding: 1rem;
-                                font-family: $al;
-                                font-size: 3.2rem;
-                                font-weight: 400;
-                                display: block;
-                                align-items: end;
-                                color: rgb(17, 10, 10);
-                                // transition: opacity 0.3s;
-                                opacity: 0; /* Inicialmente oculto */
-                              }
-                            }
-                    &:hover .categories{
-                            a {                                
-                                opacity: 1; /* Mostrar cuando se hace hover */}
-
-                              }
-                          
-                    }
-                    .data {
-                        padding: 12px;
-                        .date {
-                            font-size: 2rem;
-                            color: $lightgrey;
-                        }
-                        h2 {
-                            margin: 0;
-                            padding: 10px 0;
-                            font-family: $al;
-                            font-size: 3.2rem;
-                            font-weight: 500;
-                            a {
-                                color: $red;
-                                &:hover {
-                                    color: $darkgold;
-                                }
-                            }
-                        }
-                        .autor {
-                            font-size: 2rem;
-                            color: $blue;
-                            font-family: $al;
-                            font-style: italic;
-                        }
-                        .extracto {
-                            margin: 10px 0 0 0;
-                            font-size: 2.4rem;
-                            line-height: 1.5;
-                            color: $blue;
-                        }
-                        p{
-                            font-size: 2.4rem;
-                            font-family: $als;
-                            margin: 0; padding: 0;
-                        }
-                        &.center{
-                            text-align: center;
-                            h2{
-                                a{
-                                    color: $blue;
-                                }
-                            }
-                        }
-                    }
-                }
+              }
             }
-            a.readmore {
-                display: table;
-                margin: 0 auto;
-                font-size: 2.4rem;
-                color: $blue;
-                border-bottom: 1px solid $blue;
-                text-transform: uppercase;
+            .categories {
+              // display: flex;
+              // position: absolute;
+              padding: 1rem;
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              a {
+                text-align: right;
+                align-self: flex-end;
+                margin: 0;
+                // padding: 1rem;
+                font-family: $al;
+                font-size: 3.2rem;
+                font-weight: 400;
+                display: block;
+                align-items: end;
+                color: rgb(255, 251, 251);
+                // transition: opacity 0.3s;
+                opacity: 0; /* Inicialmente oculto */
+              }
+            }
+            &:hover .categories {
+              a {
+                opacity: 1; /* Mostrar cuando se hace hover */
+              }
+            }
+          }
+          .data {
+            padding: 12px;
+            .date {
+              font-size: 2rem;
+              color: $lightgrey;
+            }
+            h2 {
+              margin: 0;
+              padding: 10px 0;
+              font-family: $al;
+              font-size: 3.2rem;
+              font-weight: 500;
+              a {
+                color: $red;
                 &:hover {
-                    color: $darkgold;
+                  color: $darkgold;
                 }
+              }
             }
-        }
-    }
-    section.categorias {
-        .container {
-            padding: 0 10px;
-            @include respond-to($large-desktop) {
-                padding: 0;
+            .autor {
+              font-size: 2rem;
+              color: $blue;
+              font-family: $al;
+              font-style: italic;
             }
-            nav {
-                ul {
-                    list-style: none;
-                    margin: 0;
-                    padding: 0;
-                    display: grid;
-                    grid-template-columns: 1fr;
-                    grid-gap: 12px;
-                    @include respond-to($large-desktop) {
-                        grid-template-columns: repeat(6, 2fr);
-                    }
-                    li {
-                        font-size: 3.2rem;
-                        font-family: $al;
-                        font-style: italic;
-                        a {
-                            padding: 20px 10px;
-                            display: block;
-                            color: $red;
-                            background: $gold;
-                            text-align: center;
-                            &:hover {
-                                background: $red;
-                                color: #FFF;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    section.newsletter {
-        display: block;
-        margin: 30px auto;
-        .container {
-            background: $blue;
-            color: #FFF;
-            padding: 20px;
-            @include respond-to($large-desktop) {
-                padding: 70px 200px;
+            .extracto {
+              margin: 10px 0 0 0;
+              font-size: 2.4rem;
+              line-height: 1.5;
+              color: $blue;
             }
             p {
-                color: $lightgrey;
-                font-family: $al;
-                font-weight: 600;
-                font-size: 3.4rem;
-                font-style: italic;
-                margin: 0;
-                padding: 0;
-                text-align: center;
+              font-size: 2.4rem;
+              font-family: $als;
+              margin: 0;
+              padding: 0;
             }
-            form {
-                padding: 30px 0 0 0;
-                @include flexbox;
-                @include flex-wrap(wrap);
-                @include justify-content(center);
-                @include align-items(center);
-                input {
-                    width: 600px;
-                    font-size: 1.6rem;
-                    padding: 10px;
-                    border: none;
-                    margin: 0 10px 0 0;
+            &.center {
+              text-align: center;
+              h2 {
+                a {
+                  color: $blue;
                 }
-                button {
-                    width: 200px;
-                    padding: 10px;
-                    font-size: 1.6rem;
-                    background: $darkgold;
-                    border: none;
-                    color: #FFF;
-                    text-transform: uppercase;
-                    &:hover {
-                        cursor: pointer;
-                        background: darken($darkgold, 10%);
-                    }
-                }
+              }
             }
+          }
         }
+      }
+      a.readmore {
+        display: table;
+        margin: 0 auto;
+        font-size: 2.4rem;
+        color: $blue;
+        border-bottom: 1px solid $blue;
+        text-transform: uppercase;
+        &:hover {
+          color: $darkgold;
+        }
+      }
     }
+  }
+  section.categorias {
+    .container {
+      padding: 0 10px;
+      @include respond-to($large-desktop) {
+        padding: 0;
+      }
+      nav {
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-gap: 12px;
+          @include respond-to($large-desktop) {
+            grid-template-columns: repeat(6, 2fr);
+          }
+          li {
+            font-size: 3.2rem;
+            font-family: $al;
+            font-style: italic;
+            a {
+              padding: 20px 10px;
+              display: block;
+              color: $red;
+              background: $gold;
+              text-align: center;
+              &:hover {
+                background: $red;
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  section.newsletter {
+    display: block;
+    margin: 30px auto;
+    .container {
+      background: $blue;
+      color: #fff;
+      padding: 20px;
+      @include respond-to($large-desktop) {
+        padding: 70px 200px;
+      }
+      p {
+        color: $lightgrey;
+        font-family: $al;
+        font-weight: 600;
+        font-size: 3.4rem;
+        font-style: italic;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      form {
+        padding: 30px 0 0 0;
+        @include flexbox;
+        @include flex-wrap(wrap);
+        @include justify-content(center);
+        @include align-items(center);
+        input {
+          width: 600px;
+          font-size: 1.6rem;
+          padding: 10px;
+          border: none;
+          margin: 0 10px 0 0;
+        }
+        button {
+          width: 200px;
+          padding: 10px;
+          font-size: 1.6rem;
+          background: $darkgold;
+          border: none;
+          color: #fff;
+          text-transform: uppercase;
+          &:hover {
+            cursor: pointer;
+            background: darken($darkgold, 10%);
+          }
+        }
+      }
+    }
+  }
 }

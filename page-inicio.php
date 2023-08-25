@@ -6,7 +6,7 @@
       <?php if (have_rows('slider')) : ?>
         <?php while (have_rows('slider')) : the_row(); ?>
           <div class="row">
-            <div class="thumb">
+            <div class=" data thumb">
               <a href="<?php the_sub_field('enlace'); ?>">
                 <?php
                 $image = get_sub_field('imagen');
@@ -24,7 +24,7 @@
                 <?php endif ?>
               </a>
             </div>
-            <div class="data">
+            <div class="data coso">
               <h2><a href="<?php the_sub_field('enlace'); ?>"><?php the_sub_field('titulo'); ?></a></h2>
               <div class="extracto">
                 <p><?php the_sub_field('bajada'); ?></p>
