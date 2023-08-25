@@ -625,11 +625,14 @@ main.home section.destacados .sliderHome .row .thumb a img {
   }
 }
 main.home section.destacados .sliderHome .row .data {
-  padding: 20px;
+  padding: 2rem;
+  width: 100%;
+  height: 320px;
 }
 @media only screen and (min-width: 1280px) {
   main.home section.destacados .sliderHome .row .data {
     padding: 30px 100px 30px 30px;
+    height: 100%;
   }
 }
 main.home section.destacados .sliderHome .row .data h2 {
@@ -637,7 +640,7 @@ main.home section.destacados .sliderHome .row .data h2 {
   font-family: "Alegreya";
   font-weight: 500;
   line-height: 1.5;
-  margin: 0;
+  margin-left: 2rem;
   padding: 0;
 }
 main.home section.destacados .sliderHome .row .data h2 a {
@@ -649,9 +652,11 @@ main.home section.destacados .sliderHome .row .data h2 a:hover {
 main.home section.destacados .sliderHome .row .data .extracto p {
   font-size: 2.6rem;
   line-height: 1.2;
+  margin-left: 2rem;
 }
 main.home section.destacados .sliderHome .row .data .date {
   font-size: 2rem;
+  margin-left: 2rem;
   color: #C2C2C2;
 }
 main.home section.destacados .customArrow {

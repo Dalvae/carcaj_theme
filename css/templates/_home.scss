@@ -29,16 +29,19 @@ main.home {
 
                 }
                 .data {
-                    padding: 20px;
+                    padding: 2rem;
+                    width: 100%;
+                    height: 320px;
                     @include respond-to($large-desktop) {
                         padding: 30px 100px 30px 30px;
+                        height: 100%;
                     }
                     h2 {
                         font-size: 3.2rem;
                         font-family: $al;
                         font-weight: 500;
                         line-height: 1.5;
-                        margin: 0;
+                        margin-left: 2rem;
                         padding: 0;
                         a {
                             color: $red;
@@ -51,10 +54,12 @@ main.home {
                         p {
                             font-size: 2.6rem;
                             line-height: 1.2;
+                            margin-left: 2rem;
                         }
                     }
                     .date {
                         font-size: 2rem;
+                        margin-left: 2rem;
                         color: $lightgrey;
                     }
                 }
