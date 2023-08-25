@@ -29,9 +29,9 @@
 							<a target="_blank" href="https://www.instagram.com/revista.carcaj/"><i class="fab fa-instagram"></i></a>
 						</div>
 					</div>
-					<!-- <div class="row">
+					<div class="row">
 						<?php the_field('texto_footer'); ?>
-					</div> -->
+					</div>
 				</div>
 			</div>
 		</footer>
