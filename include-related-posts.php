@@ -33,7 +33,7 @@
         $args_new = array(
           'post_type' => 'post',
           'posts_per_page' =>  $remaining_posts,
-          'orderby' => 'date',
+          'orderby' => 'rand',
           'post__not_in' => array($postid),
         );
         $new_query = new WP_Query($args_new);
