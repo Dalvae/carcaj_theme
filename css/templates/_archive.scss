@@ -41,6 +41,21 @@ main.archive{
     grid-row-gap: 90px;
   }
   .item{
+    &:hover {
+      .thumb {
+        a {
+          opacity: 1.4;
+          img {
+            filter: brightness(0.5);
+          }
+        }
+        .categories {
+          a {
+            opacity: 1; /* Mostrar cuando se hace hover */
+          }
+        }
+      }
+    }
     .thumb{
       @include respond-to($large-desktop) {
         height: 250px;
@@ -57,6 +72,33 @@ main.archive{
           max-height: 250px;
           object-fit: cover;
         }
+      }
+    }
+    .categories {
+      // display: flex;
+      // position: absolute;
+      padding: 1rem;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      a {
+        text-align: right;
+        align-self: flex-end;
+        margin: 0;
+        // padding: 1rem;
+        font-family: $al;
+        font-size: 3.2rem;
+        font-weight: 400;
+        display: block;
+        align-items: end;
+        color: rgb(255, 251, 251);
+        // transition: opacity 0.3s;
+        opacity: 0; /* Inicialmente oculto */
+      }
+    }
+    &:hover .categories {
+      a {
+        opacity: 1; /* Mostrar cuando se hace hover */
       }
     }
     .data{

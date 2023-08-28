@@ -30,12 +30,30 @@
       <?php
       if ($post_count < 3) {
         $remaining_posts = 3 - $post_count;
+
+        $args_last_20 = array(
+          'post_type' => 'post',
+          'posts_per_page' => 20,
+          'orderby' => 'date',
+          'order' => 'DESC',
+          'post__not_in' => array($postid)
+        );
+
+        $last_20_query = new WP_Query($args_last_20);
+
+        $ids = array();
+        if ($last_20_query->have_posts()) {
+          $ids = wp_list_pluck($last_20_query->posts, 'ID');
+        }
+
+        $random_ids = (count($ids) > $remaining_posts) ? array_rand(array_flip($ids), $remaining_posts) : $ids;
+
         $args_new = array(
           'post_type' => 'post',
-          'posts_per_page' =>  $remaining_posts,
-          'orderby' => 'rand',
-          'post__not_in' => array($postid),
+          'post__in' => $random_ids,
+          'orderby' => 'post__in',
         );
+
         $new_query = new WP_Query($args_new);
 
         if ($new_query->have_posts()) :
@@ -60,7 +78,9 @@
       <?php endwhile;
           wp_reset_postdata();
         endif;
-      } ?>
+      }
+      ?>
+
     </div>
   </div>
 </section>

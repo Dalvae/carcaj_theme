@@ -2,130 +2,149 @@ main.home {
   section.destacados {
     position: relative;
     .sliderHome {
-      .row {
-        display: flex;
-        flex: 1;
-        align-items: stretch;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 2rem;
-        background: #f5f5ed;
-        @include respond-to($large-desktop) {
-          .thumb {
-            flex: 1.8;
-            a {
-              max-height: 50rem;
-              align-self: center;
-              flex: 1.8;
-              object-fit: cover;
-            }
-          }
-          .coso {
-            flex: 1.2;
-          }
-        }
-        @include respond-to($extra-large-desktop) {
-          .thumb {
-            a {
-              flex: 1.8;
-              object-fit: cover;
-            }
-          }
-          .coso {
-            flex: 1.2;
-          }
-        }
-        .thumb {
-          // flex: 1;
-          align-self: center;
-          object-fit: cover;
-          // height: 100%;
-          width: 100%;
-          a {
+        .row {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100%; // Asegurar que ocupa toda la altura de .thumb
-            width: 100%; //
-            img {
-              align-self: center;
-              justify-content: center;
-              height: 100%;
-              width: 100%;
-              object-fit: cover;
-            }
-          }
-        }
-        .data {
-          // padding: 2rem;
-          // width: 100%;
+            flex-wrap: wrap;
+            background: #f5f5ed;
 
-          // @include respond-to($large-desktop) {
-          //     padding: 30px 100px 30px 30px;
-          //     height: 100%;
-          // }
-          // align-items: stretch;
-          h2 {
-            font-size: 3.2rem;
-            font-family: $al;
-            font-weight: 500;
-            line-height: 1.5;
-            margin-left: 2rem;
-            padding: 0;
-            a {
-              color: $red;
-              &:hover {
-                color: $gold;
-              }
+            .thumb {
+                align-self: center;
+                width: 100%;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    img {
+                        align-self: center;
+                        height: 100%;
+                        max-height: 35rem;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
             }
-          }
-          .extracto {
-            p {
-              font-size: 2.6rem;
-              line-height: 1.2;
-              margin-left: 2rem;
+
+            .coso {
+
+                height: 35rem;
+                align-self: stretch;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                margin-top: 0rem;
+
+                h2 {
+                    font-size: 3.2rem;
+                    font-family: $al;
+                    font-weight: 500;
+                    line-height: 1.5;
+                    text-align: center;
+                    padding: 0;
+                    margin: 0;
+
+                    a {
+                        color: $red;
+                        text-align: center;
+
+                        &:hover {
+                            color: $gold;
+                        }
+                    }
+                }
+
+                .extracto {
+                  // margin-top: 6rem;
+                  // margin-bottom: 6rem;
+                  // margin-left: 20rem;
+                  // margin-right: 20rem;
+                    p {
+                        font-size: 2.6rem;
+                        line-height: 1.2;
+      
+                    }
+                }
+
+                .date {
+                    font-size: 2rem;
+                    text-align: center;
+                    margin: 0 3rem;
+                    color: $lightgrey;
+                }
             }
-          }
-          .date {
-            font-size: 2rem;
-            margin-left: 2rem;
-            color: $lightgrey;
-          }
+
+            @include respond-to($large-desktop) {
+                .thumb {
+                    flex: 1.8;
+
+                    a {
+                      img{
+                        max-height: 50rem;
+                      }
+                       
+                        align-self: center;
+                    }
+                }
+
+                .coso {
+                  margin-top: 5rem;
+                  margin-left: 10rem;
+                  margin-right: 10rem;
+                    flex: 1;  
+                }
+            }
+
+            @include respond-to($extra-large-desktop) {
+                .thumb {
+                    a {
+                      img{
+                        max-height: 50rem;
+                      }
+                    }
+                }
+
+                .coso {
+                    flex: 1.2;  
+                }
+            }
         }
-        .coso {
-          align-items: stretch;
-          height: 30rem;
-        }
-      }
     }
+
     .customArrow {
-      position: absolute;
-      top: 50%;
-      color: $red;
-      font-size: 2.5rem;
-      transform: translate(0, -50%);
-      &:hover {
-        cursor: pointer;
-        color: darken($red, 10%);
-      }
-      &.prevArrow {
-        left: 5px;
-      }
-      &.nextArrow {
-        right: 5px;
-      }
+        position: absolute;
+        top: 50%;
+        color: $red;
+        font-size: 2.5rem;
+        transform: translate(0, -50%);
+
+        &:hover {
+            cursor: pointer;
+            color: darken($red, 10%);
+        }
+
+        &.prevArrow {
+            left: 5px;
+        }
+
+        &.nextArrow {
+            right: 5px;
+        }
     }
-  }
+}
+
   section.articles {
-    margin: 30px auto 90px;
     .container {
-      padding: 0 10px;
+      padding-top: 1rem;
       @include respond-to($large-desktop) {
-        padding: 0;
+        padding-top: 4rem;
       }
 
       h1 {
-        display: table;
+        // display: table;
         font-family: $al;
         font-size: 5.4rem;
         font-weight: 500;
@@ -133,6 +152,7 @@ main.home {
         padding: 0 0 70px 0;
         &.cat {
           color: $blue;
+          text-align: center;
         }
         &.search {
           color: $red;
@@ -140,30 +160,32 @@ main.home {
       }
       .items-list {
         padding: 0 0 90px 0;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-column-gap: 12px;
-        grid-row-gap: 50px;
-        @include respond-to($large-desktop) {
-          grid-template-columns: repeat(3, 4fr);
-          grid-column-gap: 12px;
-          grid-row-gap: 9x;
-        }
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
         .item {
-            &:hover {
-               .thumb{ a {
-                  opacity: 1.4;
-                  img {
-                    filter: brightness(0.5);
-                  }
-                }
-                .categories {
-                    a {
-                      opacity: 1; /* Mostrar cuando se hace hover */
-                    }
-                  }
+          flex-basis: 100%;
+           max-width: 100%;
+          margin-bottom: 50px;
+          @include respond-to($large-desktop) {
+            flex-basis: calc(33.33% - 12px); // 
+            max-width: 400px;
+          }
+          &:hover {
+            .thumb {
+              a {
+                opacity: 1.4;
+                img {
+                  filter: brightness(0.5);
                 }
               }
+              .categories {
+                a {
+                  opacity: 1; /* Mostrar cuando se hace hover */
+                }
+              }
+            }
+          }
           .thumb {
             position: relative;
             position: relative;
@@ -178,6 +200,7 @@ main.home {
                 max-height: 200px;
                 @include respond-to($large-desktop) {
                   max-height: 250px;
+                  height: 250px;
                 }
               }
             }
@@ -211,6 +234,8 @@ main.home {
           }
           .data {
             padding: 12px;
+            
+            
             .date {
               font-size: 2rem;
               color: $lightgrey;
@@ -221,7 +246,11 @@ main.home {
               font-family: $al;
               font-size: 3.2rem;
               font-weight: 500;
+              overflow: hidden;  
+              text-overflow: ellipsis;   
+              
               a {
+                max-width: 95%;
                 color: $red;
                 &:hover {
                   color: $darkgold;
@@ -245,6 +274,8 @@ main.home {
               font-family: $als;
               margin: 0;
               padding: 0;
+              overflow: hidden;  
+              text-overflow: ellipsis;  
             }
             &.center {
               text-align: center;
@@ -259,6 +290,7 @@ main.home {
       }
       a.readmore {
         display: table;
+        padding-bottom: 3rem;
         margin: 0 auto;
         font-size: 2.4rem;
         color: $blue;

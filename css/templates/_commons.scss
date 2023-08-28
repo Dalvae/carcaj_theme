@@ -8,9 +8,13 @@
         padding: 0;
     }
     @include respond-to($large-desktop) {
-        width: 1200px;
+         width: 1200px;
         padding: 0;
     }
+    @include respond-to($extra-large-desktop) {
+        width: 1284px;
+       padding: 0;
+   }
 }
 
 a,

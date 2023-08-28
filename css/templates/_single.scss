@@ -21,7 +21,7 @@ main.single {
         .content-post {
             @include respond-to($large-desktop) {
                 // display: table;
-                width: 100%;
+                width: 80%;
                 margin: 2rem auto;
             }
             .top {
