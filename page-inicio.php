@@ -28,8 +28,8 @@
               <h2><a href="<?php the_sub_field('enlace'); ?>"><?php the_sub_field('titulo'); ?></a></h2>
               <div class="extracto">
                 <p><?php the_sub_field('bajada'); ?></p>
+                <div class="date"><?php the_sub_field('fecha'); ?></div>
               </div>
-              <div class="date"><?php the_sub_field('fecha'); ?></div>
             </div>
           </div>
         <?php endwhile; // while( has_sub_field('to-do_lists') ): 
