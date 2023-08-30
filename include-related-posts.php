@@ -4,7 +4,13 @@
     <div class="itemsList">
       <?php
       $postid = get_the_ID();
-      $args = array('post_type' => 'post', 'author' => get_the_author_meta('ID'), 'posts_per_page' => 3, 'orderby' => 'rand', 'post__not_in' => array($postid));
+      $args = array(
+        'post_type' => 'post',
+        'author' => get_the_author_meta('ID'),
+        'posts_per_page' => 3,
+        'orderby' => 'rand',
+        'post__not_in' => array($postid)
+      );
       $query = new WP_Query($args);
       $post_count = $query->post_count;
       if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
@@ -46,7 +52,12 @@
           $ids = wp_list_pluck($last_20_query->posts, 'ID');
         }
 
-        $random_ids = (count($ids) > $remaining_posts) ? array_rand(array_flip($ids), $remaining_posts) : $ids;
+        if ($remaining_posts == 1) {
+          $random_id = array_rand($ids);
+          $random_ids = array($ids[$random_id]);
+        } else {
+          $random_ids = (count($ids) > $remaining_posts) ? array_rand(array_flip($ids), $remaining_posts) : $ids;
+        }
 
         $args_new = array(
           'post_type' => 'post',
@@ -80,7 +91,6 @@
         endif;
       }
       ?>
-
     </div>
   </div>
 </section>
