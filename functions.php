@@ -62,7 +62,7 @@ function html5blank_nav()
 function nedwp_enqueue_assets()
 {
 
-	wp_enqueue_style('base', get_template_directory_uri() . '/css/main.css', array(), '1.0.0', 'all');
+	wp_enqueue_style('base', get_template_directory_uri() . '/css/main.css', array(), '2.0.0', 'all');
 	wp_enqueue_style('slick', get_template_directory_uri() . '/css/lib/slick.css', array(), '1.0.0', 'all');
 
 	wp_enqueue_script('scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.1.2');
@@ -240,7 +240,7 @@ function html5blankcomments($comment, $args, $depth)
 				<div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>">
 						<?php
 						printf(__('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'), '  ', '');
-																						?>
+																									?>
 				</div>
 			</div>
 			<?php if ($comment->comment_approved == '0') : ?>
