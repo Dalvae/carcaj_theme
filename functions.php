@@ -67,6 +67,17 @@ function nedwp_enqueue_assets()
 
 	wp_enqueue_script('scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.1.2');
 	wp_enqueue_script('slick', get_template_directory_uri() . '/js/lib/slick.min.js', array('jquery'), '1.1.2');
+
+	// Añadir nuestro nuevo script de características interactivas
+	if (is_single()) { // Solo en posts individuales
+		wp_enqueue_script(
+			'interactive-features',
+			get_template_directory_uri() . '/js/interactive-features.js',
+			array('jquery'),
+			'1.0.0',
+			true // Cargar en el footer
+		);
+	}
 }
 
 
