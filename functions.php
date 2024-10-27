@@ -62,7 +62,7 @@ function html5blank_nav()
 function nedwp_enqueue_assets()
 {
 
-	wp_enqueue_style('base', get_template_directory_uri() . '/css/main.css', array(), '2.0.0', 'all');
+	wp_enqueue_style('base', get_template_directory_uri() . '/css/main.css', array(), '3.0.0', 'all');
 	wp_enqueue_style('slick', get_template_directory_uri() . '/css/lib/slick.css', array(), '1.0.0', 'all');
 
 	wp_enqueue_script('scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.1.2');
