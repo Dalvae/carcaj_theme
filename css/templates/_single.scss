@@ -67,6 +67,10 @@
 }
 main.single {
     article {
+        a {
+        text-decoration: underline;
+        }
+
         .top-post {
             margin: 35px 0;
             img {
@@ -142,7 +146,6 @@ main.single {
                 sup {
                     a {
                         color: $rojo;
-                        font-size: 2rem;
                         text-decoration: dashed;                        
                         &:hover {
                             color: $gold;
