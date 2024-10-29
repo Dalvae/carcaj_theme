@@ -68,19 +68,6 @@
                 </div>
               </div>
             <?php endwhile; ?>
-
-            <!-- Añadimos la paginación -->
-            <div class="pagination">
-              <?php
-              echo paginate_links(array(
-                'base' => str_replace(999999999, '%#%', get_pagenum_url(999999999)),
-                'format' => '?paged=%#%',
-                'current' => max(1, $paged),
-                'total' => $query->max_num_pages
-              ));
-              ?>
-            </div>
-
           <?php wp_reset_postdata();
           endif; ?>
         </div>
