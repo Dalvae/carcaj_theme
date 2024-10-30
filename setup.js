@@ -2,23 +2,30 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const tar = require("tar");
-
 const CONFIG = {
   backupDir: "./backup",
   tempDir: "./temp",
+  envFile: "./.env",
 };
+
+// Función para extraer valores de wp-config.php
+function getConfigValue(content, key) {
+  const regex = new RegExp(`define\\(['"]${key}['"],\\s*['"](.+?)['"]\\)`);
+  const match = content.match(regex);
+  return match ? match[1] : null;
+}
+
+// Función para actualizar valores en wp-config.php
+function updateConfigValue(content, key, value) {
+  const regex = new RegExp(`(define\\(['"]${key}['"],\\s*['"])(.+?)(['"]\\))`);
+  return content.replace(regex, `$1${value}$3`);
+}
 
 async function setup() {
   try {
     console.log("🚀 Iniciando setup del entorno de desarrollo...");
 
-    // [Pasos 1-8 se mantienen igual...]
-    if (fs.existsSync(CONFIG.tempDir)) {
-      console.log("🧹 Limpiando directorio temporal anterior...");
-      fs.rmSync(CONFIG.tempDir, { recursive: true, force: true });
-    }
-    fs.mkdirSync(CONFIG.tempDir);
-
+    // Verificar backup
     if (!fs.existsSync(CONFIG.backupDir)) {
       throw new Error(`No se encontró el directorio ${CONFIG.backupDir}`);
     }
@@ -26,164 +33,116 @@ async function setup() {
     const backupFile = fs
       .readdirSync(CONFIG.backupDir)
       .find((file) => file.endsWith(".tar.gz"));
-
     if (!backupFile) {
       throw new Error(
         "No se encontró archivo de backup .tar.gz en la carpeta backup/"
       );
     }
 
-    console.log("📦 Extrayendo backup...");
-    await tar.x({
-      file: path.join(CONFIG.backupDir, backupFile),
-      cwd: CONFIG.tempDir,
-    });
+    const backupDirName = path.basename(backupFile, ".tar.gz");
+    const backupDir = path.join(CONFIG.tempDir, backupDirName);
 
-    const backupDir = path.join(
-      CONFIG.tempDir,
-      path.basename(backupFile, ".tar.gz")
-    );
-    console.log(`📂 Backup extraído en: ${backupDir}`);
-
-    const requiredPaths = {
-      mysql: path.join(backupDir, "mysql"),
-      uploads: path.join(backupDir, "homedir/public_html/wp-content/uploads"),
-      plugins: path.join(backupDir, "homedir/public_html/wp-content/plugins"),
-    };
-
-    const absolutePaths = {};
-    for (const [key, relativePath] of Object.entries(requiredPaths)) {
-      absolutePaths[key] = path.resolve(process.cwd(), relativePath);
-      if (!fs.existsSync(absolutePaths[key])) {
-        throw new Error(
-          `No se encontró el directorio ${key} en el backup: ${absolutePaths[key]}`
-        );
+    // Extraer backup si es necesario
+    if (!fs.existsSync(backupDir)) {
+      console.log("📦 Extrayendo backup...");
+      if (!fs.existsSync(CONFIG.tempDir)) {
+        fs.mkdirSync(CONFIG.tempDir);
       }
+      await tar.x({
+        file: path.join(CONFIG.backupDir, backupFile),
+        cwd: CONFIG.tempDir,
+      });
+      console.log(`📂 Backup extraído en: ${backupDir}`);
     }
 
+    // Leer wp-config.php para obtener la configuración de la base de datos
+    const wpConfigPath = path.join(
+      backupDir,
+      "homedir/public_html/wp-config.php"
+    );
+    let wpConfigContent = fs.readFileSync(wpConfigPath, "utf8");
+
+    // Extraer valores de configuración
+    const dbConfig = {
+      name: getConfigValue(wpConfigContent, "DB_NAME"),
+      user: getConfigValue(wpConfigContent, "DB_USER"),
+      password: getConfigValue(wpConfigContent, "DB_PASSWORD"),
+    };
+
+    // Crear directorio para archivos temporales si no existe
+    const configTempDir = path.join(CONFIG.tempDir, "config");
+    if (!fs.existsSync(configTempDir)) {
+      fs.mkdirSync(configTempDir, { recursive: true });
+    }
+
+    // Modificar valores en wp-config.php
+    console.log("📝 Actualizando wp-config.php para desarrollo local");
+    wpConfigContent = updateConfigValue(wpConfigContent, "DB_HOST", "db");
+
+    // Agregar configuraciones útiles para desarrollo
+    wpConfigContent = wpConfigContent.replace(
+      "/* That's all, stop editing! Happy publishing. */",
+      `
+/* Configuraciones adicionales para desarrollo local */
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', true);
+define('SCRIPT_DEBUG', true);
+define('CONCATENATE_SCRIPTS', false);
+/* That's all, stop editing! Happy publishing. */`
+    );
+
+    // Guardar wp-config.php modificado
+    const modifiedWpConfigPath = path.join(configTempDir, "wp-config.php");
+    fs.writeFileSync(modifiedWpConfigPath, wpConfigContent);
+    console.log(
+      `✅ wp-config.php modificado guardado en: ${modifiedWpConfigPath}`
+    );
+
+    // Buscar archivo SQL en el backup
+    const absolutePaths = {
+      mysql: path.join(backupDir, "mysql"),
+    };
     const sqlFile = fs
       .readdirSync(absolutePaths.mysql)
       .find((file) => file.endsWith(".sql"));
-
     if (!sqlFile) {
       throw new Error("No se encontró archivo SQL en el backup");
     }
+    const sqlFilePath = path.join(absolutePaths.mysql, sqlFile);
     console.log(`💾 Encontrado archivo SQL: ${sqlFile}`);
 
-    console.log("📝 Actualizando configuración de wp-env...");
-    const wpEnvConfig = JSON.parse(fs.readFileSync(".wp-env.json", "utf8"));
+    // Generar contenido del .env
+    const envContent = `
+# Rutas
+WP_ROOT=${path.resolve(backupDir, "homedir/public_html")}
+THEME_DIR=${path.resolve(process.cwd())}
+WP_CONFIG=${path.resolve(modifiedWpConfigPath)}
+SQL_FILE=${path.resolve(sqlFilePath)}
+# Base de datos
+DB_NAME=${dbConfig.name}
+DB_USER=${dbConfig.user}
+DB_PASSWORD=${dbConfig.password}
+DB_HOST=db
+DB_PREFIX=wpyl_
+# WordPress
+WP_DEBUG=true
+WP_PORT=8888
+# Docker
+COMPOSE_PROJECT_NAME=carcaj_theme
+`.trim();
 
-    // Actualizar configuración para usar el prefijo de tabla correcto
-    wpEnvConfig.config = {
-      ...wpEnvConfig.config,
-      table_prefix: "wpyl_", // Añadir el prefijo correcto
-    };
-
-    wpEnvConfig.mappings = {
-      ...wpEnvConfig.mappings,
-      "wp-content/uploads": absolutePaths.uploads,
-      "wp-content/plugins": absolutePaths.plugins,
-      temp: path.resolve(process.cwd(), CONFIG.tempDir),
-    };
-
-    fs.writeFileSync(".wp-env.json", JSON.stringify(wpEnvConfig, null, 2));
-    console.log("✨ Configuración guardada en .wp-env.json");
-
-    try {
-      console.log("🛑 Deteniendo instancia anterior de wp-env...");
-      execSync("wp-env stop", { stdio: "inherit" });
-    } catch (error) {
-      console.log("No había instancia previa corriendo.");
-    }
-
-    console.log("🌍 Iniciando WordPress...");
-    execSync("wp-env start", { stdio: "inherit" });
-
-    console.log("⏳ Esperando a que MySQL esté disponible...");
-    await new Promise((resolve) => setTimeout(resolve, 10000));
-
-    console.log("💾 Importando base de datos...");
-    try {
-      // Resetear la base de datos con el prefijo correcto
-      execSync("wp-env run cli -- wp db reset --yes", { stdio: "inherit" });
-
-      // Importar el backup
-      const dbCommand = `wp-env run cli -- wp db import /var/www/html/temp/${path.basename(
-        backupDir
-      )}/mysql/${sqlFile}`;
-      console.log(`Ejecutando: ${dbCommand}`);
-      execSync(dbCommand, { stdio: "inherit" });
-
-      // Verificar el prefijo de tabla actual
-      console.log("🔍 Verificando prefijo de tabla...");
-      execSync("wp-env run cli -- wp db prefix", { stdio: "inherit" });
-
-      // Actualizar URLs usando el prefijo correcto
-      console.log("🔄 Actualizando URLs en la base de datos...");
-      execSync(
-        'wp-env run cli -- wp search-replace "http://carcaj.cl" "http://localhost:8888" --all-tables --precise',
-        { stdio: "inherit" }
-      );
-    } catch (error) {
-      console.error(
-        "Error durante la importación de la base de datos:",
-        error.message
-      );
-      throw error;
-    }
-
-    console.log("🔄 Actualizando configuración del tema...");
-    const wpCommands = [
-      ["wp-env", "run", "cli", "--", "wp", "theme", "activate", "carcaj"],
-      [
-        "wp-env",
-        "run",
-        "cli",
-        "--",
-        "wp",
-        "option",
-        "update",
-        "home",
-        "http://localhost:8888",
-      ],
-      [
-        "wp-env",
-        "run",
-        "cli",
-        "--",
-        "wp",
-        "option",
-        "update",
-        "siteurl",
-        "http://localhost:8888",
-      ],
-      ["wp-env", "run", "cli", "--", "wp", "cache", "flush"],
-    ];
-
-    for (const cmd of wpCommands) {
-      execSync(cmd.join(" "), { stdio: "inherit" });
-    }
-
-    console.log("🔍 Verificando configuración final...");
-    const verifyCommands = [
-      ["wp-env", "run", "cli", "--", "wp", "db", "prefix"],
-      ["wp-env", "run", "cli", "--", "wp", "theme", "status", "carcaj"],
-      ["wp-env", "run", "cli", "--", "wp", "option", "get", "home"],
-      ["wp-env", "run", "cli", "--", "wp", "option", "get", "siteurl"],
-    ];
-
-    for (const cmd of verifyCommands) {
-      execSync(cmd.join(" "), { stdio: "inherit" });
-    }
+    // Guardar .env
+    fs.writeFileSync(CONFIG.envFile, envContent);
+    console.log("📝 Archivo .env generado con la configuración");
 
     console.log("\n✅ Setup completado!");
-    console.log("📱 Sitio disponible en: http://localhost:8888");
-    console.log("👤 Usuario: admin");
-    console.log("🔑 Contraseña: password");
+    console.log("Para iniciar el ambiente de desarrollo:");
+    console.log("1. Ejecuta: docker-compose down -v");
+    console.log("2. Ejecuta: docker-compose up -d");
+    console.log("3. Visita: http://localhost:8888");
   } catch (error) {
     console.error("❌ Error durante el setup:", error.message);
-    if (error.stdout) console.error(error.stdout.toString());
-    if (error.stderr) console.error(error.stderr.toString());
     process.exit(1);
   }
 }
