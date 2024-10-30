@@ -1,23 +1,22 @@
-$border : 1px solid rgba(255, 255, 255, 0.1);
-$bg-hour : rgba(234, 96, 96, 0.5);
-$bg-hour-hover: rgba(234, 96, 96, 0.8); 
+@use "../config" as *;
+@use "sass:color";
 
 section.schedule-block{
   .title-top{
+    border: $border;
+    min-height: 65px;
     @include flexbox;
     @include flex-wrap(wrap);
     @include justify-content(center);
     @include align-items(center);
-    border: $border;
-    min-height: 65px;
     .month{
       width: 100%;
-      background: $rojo;
+      background: $red;
       border-right: $border;
       padding: 10px 20px;
       color: #FFF;
       text-transform: uppercase;
-      @include respond-to($large-desktop) {
+      @include respond-to('large-desktop') {
         width: 25%;
       }
       h3{        
@@ -36,13 +35,13 @@ section.schedule-block{
       @include flex-wrap(wrap);
       @include justify-content(center);
       @include align-items(center);
-      @include respond-to($large-desktop) {
+      @include respond-to('large-desktop') {
         width: 75%;
       }
       .day{
+        border-right: $border;
         @include flex-grow(1);
         @include flex-basis(0);
-        border-right: $border;
         &:last-child{
           border-right: none;
         }
@@ -58,7 +57,7 @@ section.schedule-block{
           text-transform: uppercase;
         }
         &.current{
-          background: darken($rosado, 5%);
+          background: color.adjust($rosado, $lightness: -5%)
           a{
             color: #FFF;
           }
@@ -82,7 +81,7 @@ section.schedule-block{
             a{            
               background: $rosado;
               &:hover{
-                background: darken($rosado, 10%);            
+                background: color.adjust($rosado, $lightness: 5%)          
               }
             }
           }        
@@ -111,7 +110,7 @@ section.schedule-block{
           font-family: $avblack;
           margin: 0 auto;
           padding: 20px 0;
-          @include respond-to($large-desktop) {
+          @include respond-to('large-desktop') {
             font-size: 3rem;
           }
         }
@@ -125,14 +124,14 @@ section.schedule-block{
           @include flex-wrap(wrap);
           @include justify-content(flex-start);
           @include align-items(center);
-          @include respond-to($large-desktop) {            
+          @include respond-to('large-desktop') {            
             padding: 15px 30px;
           }
           img{
             margin: 0 10px 0 0;  
             width: 50px;          
             height: auto;
-            @include respond-to($large-desktop) {            
+            @include respond-to('large-desktop') {            
               margin: 0 20px 0 0;
             } 
           }
@@ -142,7 +141,7 @@ section.schedule-block{
             font-weight: 800;
             text-transform: uppercase;
             margin: 0; padding: 0;
-            @include respond-to($large-desktop) {            
+            @include respond-to('large-desktop') {            
               font-size: 3rem;
             } 
           }

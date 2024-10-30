@@ -92,7 +92,7 @@
 
   <section class="newsletter">
     <div class="container">
-      <p>Suscríbete y recibe actualizaciones en tu correo electrónico</p>
+      <p>Suscríbete y recibe actualizaciones en tu correo electrónicoss</p>
       <form>
         <input type="" placeholder="Tu email">
         <button>Enviar</button>

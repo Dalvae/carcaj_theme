@@ -1,12 +1,13 @@
+@use "../config" as *;
 main.archive{
   &.container{
+    background: #FFF;
+    padding: 20px 10px;   
     @include flexbox;
     @include flex-wrap(wrap);
     @include justify-content(space-between);
-    @include align-items(flex-start);
-    background: #FFF;
-    padding: 20px 10px;    
-    @include respond-to($large-desktop) {
+    @include align-items(flex-start); 
+    @include respond-to('large-desktop') {
       padding: 20px 0;    
     }
   }
@@ -35,7 +36,7 @@ main.archive{
   grid-template-columns: 1fr;
   grid-column-gap: 12px;
   grid-row-gap: 50px;
-  @include respond-to($large-desktop) {
+  @include respond-to('large-desktop') {
     grid-template-columns: repeat(3, 4fr);
     grid-column-gap: 12px;
     grid-row-gap: 90px;
@@ -57,7 +58,7 @@ main.archive{
       }
     }
     .thumb{
-      @include respond-to($large-desktop) {
+      @include respond-to('large-desktop') {
         height: 250px;
       }
       a{

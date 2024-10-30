@@ -58,28 +58,82 @@ function html5blank_nav()
 }
 
 
-// Load Styles
 function nedwp_enqueue_assets()
 {
+	// Definir si estamos en desarrollo
+	$is_development = defined('WP_DEBUG') && WP_DEBUG;
 
-	wp_enqueue_style('base', get_template_directory_uri() . '/css/main.css', array(), '3.0.0', 'all');
-	wp_enqueue_style('slick', get_template_directory_uri() . '/css/lib/slick.css', array(), '1.0.0', 'all');
+	// Obtener la versión del tema
+	$theme_version = wp_get_theme()->get('Version');
 
-	wp_enqueue_script('scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.1.2');
-	wp_enqueue_script('slick', get_template_directory_uri() . '/js/lib/slick.min.js', array('jquery'), '1.1.2');
+	// Timestamp para cache busting en desarrollo
+	$version = $is_development ? time() : $theme_version;
 
-	// Añadir nuestro nuevo script de características interactivas
-	if (is_single()) { // Solo en posts individuales
-		wp_enqueue_script(
-			'interactive-features',
-			get_template_directory_uri() . '/js/interactive-features.js',
-			array('jquery'),
-			'1.0.0',
-			true // Cargar en el footer
+	// CSS principal
+	if ($is_development) {
+		wp_enqueue_style(
+			'theme-styles',
+			get_template_directory_uri() . '/css/main.css',
+			array(),
+			$version
+		);
+	} else {
+		wp_enqueue_style(
+			'theme-styles',
+			get_template_directory_uri() . '/css/main.min.css',
+			array(),
+			$theme_version
 		);
 	}
+
+	// Slick CSS
+	wp_enqueue_style(
+		'slick-styles',
+		get_template_directory_uri() . '/css/lib/slick.css',
+		array(),
+		'1.8.1'
+	);
+
+	// jQuery
+	wp_enqueue_script('jquery');
+
+	// Slick JS
+	wp_enqueue_script(
+		'slick',
+		get_template_directory_uri() . '/js/lib/slick.min.js',
+		array('jquery'),
+		'1.8.1',
+		true
+	);
+
+	// JavaScript principal
+	wp_enqueue_script(
+		'theme-scripts',
+		get_template_directory_uri() . '/js/' . ($is_development ? 'main.js' : 'main.min.js'),
+		array('jquery', 'slick'),
+		$version,
+		true
+	);
+
+	// Variables globales para JavaScript
+	wp_localize_script(
+		'theme-scripts',
+		'themeVars',
+		array(
+			'ajaxUrl' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('theme_nonce'),
+			'isDev' => $is_development
+		)
+	);
 }
 
+add_action('wp_enqueue_scripts', 'nedwp_enqueue_assets');
+
+// Opcional: Función helper para determinar el ambiente
+function is_development()
+{
+	return defined('WP_DEBUG') && WP_DEBUG;
+}
 
 // REMOVE SHORTLINK
 add_filter('get_shortlink', 'disable_stuff');

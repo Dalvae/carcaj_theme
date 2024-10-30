@@ -1,0 +1,18 @@
+@use "sass:map";
+@use "../config/variables" as vars;
+
+@mixin respond-to($breakpoint) {
+    & {
+      @media only screen and #{map.get(vars.$media-queries, $breakpoint)} {
+        @content;
+      }
+    }
+  }
+
+@mixin transition {
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -ms-transition: 0.3s;
+    transition: 0.3s;
+}

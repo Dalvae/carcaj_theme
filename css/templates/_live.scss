@@ -1,3 +1,5 @@
+@use "../config" as *;
+
 main.player-live{  
   padding: 20px 0;
   .container{
@@ -7,7 +9,7 @@ main.player-live{
     @include align-items(center);
     .block-player{
       width: 100%;
-      @include respond-to($large-desktop) {
+      @include respond-to('large-desktop') {
         width: calc(100% - 340px);
         #player{
           min-height: 500px;
@@ -24,7 +26,7 @@ main.player-live{
         @include justify-content(center);
         @include align-items(center);        
       }
-      @include respond-to($large-desktop) {
+      @include respond-to('large-desktop') {
         width: 300px;
         margin: 0;
       }

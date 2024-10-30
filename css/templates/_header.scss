@@ -1,10 +1,13 @@
+@use "sass:color";
+@use "../config" as *;  
+
 header {
     .container {
         padding: 20px 10px;
-        @include respond-to($large-desktop) {
+        position: relative;
+        @include respond-to('large-desktop') {
             padding: 20px 0;
         }
-        position: relative;
         @include flexbox;
         @include flex-wrap(wrap);
         @include justify-content(space-between);
@@ -16,7 +19,7 @@ header {
             }
             img {
                 height: 40px;
-                @include respond-to($large-desktop) {
+                @include respond-to('large-desktop') {
                     height: 77px;
                 }
             }
@@ -28,21 +31,21 @@ header {
             border:none;
             background: #FFF;
             -webkit-appearance: none;
-            @include respond-to($large-desktop) {
+            @include respond-to('large-desktop') {
                 display: none;
             }
         }        
         nav {
             display: block;            
             position: relative;
-            @include respond-to($large-desktop) {
+            @include respond-to('large-desktop') {
                 display: block;
             }
             ul {
                 list-style: none;
                 margin: 0;
                 padding: 0;
-                @include respond-to($large-desktop) {
+                @include respond-to('large-desktop') {
                     @include flexbox;
                     @include flex-wrap(wrap);
                     @include justify-content(flex-end);
@@ -53,7 +56,7 @@ header {
                     font-size: 2rem;
                     font-weight: 600;
                     position: relative;
-                    @include respond-to($large-desktop) {
+                    @include respond-to('large-desktop') {
                         margin: 0 0 0 30px;
                     }
                     a {
@@ -84,14 +87,14 @@ header {
                         @include flex-wrap(wrap);
                         @include justify-content(flex-start);
                         @include align-items(center);
-                        @include respond-to($phone) {
+                        @include respond-to('phone') {
                             position: relative;
-                            @include flexbox;
                             padding: 10px 0 0 20px;
+                            @include flexbox;
                         }
                         li{
                             margin: 0 0 10px 0;
-                            @include respond-to($phone) {
+                            @include respond-to('phone') {
                                 display: block;
                                 width: 100%;
                             }
@@ -109,7 +112,7 @@ header {
             margin: 0 0 0 20px;
             border-bottom: 1px solid $grey;
             padding: 0 0 5px 0;            
-            @include respond-to($phone) {
+            @include respond-to('phone') {
                 margin: 0 0 20px 0;
             }
             form {
@@ -122,7 +125,7 @@ header {
                         font-style: italic;
                         font-family: $al;
                     }
-                    @include respond-to($large-desktop) {
+                    @include respond-to('large-desktop') {
                         width: 100px;
                     }
                 }
@@ -143,20 +146,20 @@ header {
             @include flex-wrap(wrap);
             @include justify-content(flex-end);
             @include align-items(center);
-            @include respond-to($phone) {
-                @include justify-content(flex-start);
+            @include respond-to('phone') {
+            @include justify-content(flex-start);
             }
             a {
                 font-size: 1.8rem;
                 margin: 0 0 0 15px;
-                @include respond-to($phone) {
+                @include respond-to('phone') {
                     font-size: 3rem;
                 }
             }
         }
         .col {
             &:last-child {
-                @include respond-to($phone) {
+                @include respond-to('phone') {
                     display: none;       
                     width: 100%;
                     position: absolute;
@@ -169,7 +172,7 @@ header {
                 @include flex-wrap(wrap);
                 @include justify-content(flex-end);
                 @include align-items(center);
-                @include respond-to($large-desktop) {
+                @include respond-to('large-desktop') {
                     @include flexbox;
                 }
             }

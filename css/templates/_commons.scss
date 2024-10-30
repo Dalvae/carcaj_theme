@@ -1,42 +1,27 @@
+@use "../config" as *;
+
 .container {
-    width: 100%;
-    display: block;
+    width: 90%;
     margin: 0 auto;
-    padding: 0 10px;
-    @include respond-to($tablet-landscape) {
+    padding: 0 20px;
+    
+    @include respond-to('tablet-landscape') {
         width: 100%;
         padding: 0;
     }
-    @include respond-to($large-desktop) {
-         width: 1200px;
+    @include respond-to('large-desktop') {
+        width: 1200px;
         padding: 0;
     }
-    @include respond-to($extra-large-desktop) {
+    @include respond-to('extra-large-desktop') {
         width: 1284px;
-       padding: 0;
-   }
+        padding: 0;
+    }
 }
 
 a,
 a:hover,
 img,
 img:hover {
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -o-transition: 0.3s;
-    -ms-transition: 0.3s;
-    transition: 0.3s;
+    @include transition;
 }
-
-// VARIABLES
-$orange: #9A7A14;
-$grey: #585858;
-$red: #D22800;
-$blue: #47586A;
-$swhite: #F5F5ED;
-$gold: #D8D4AE;
-$darkgold: #9A7A14;
-$lightgrey: #C2C2C2;
-$op: 'Open Sans';
-$al: 'Alegreya';
-$als: 'Alegreya Sans';

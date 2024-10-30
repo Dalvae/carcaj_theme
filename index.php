@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-  <main class="home">    
-    <section class="destacados">      
-      <div class="sliderHome">
-      <?php for ($i = 1; $i <= 5; $i++) { ?>           
+<main class="home">
+  <section class="destacados">
+    <div class="sliderHome">
+      <?php for ($i = 1; $i <= 5; $i++) { ?>
         <div class="row">
           <div class="thumb">
             <a href="#">
@@ -18,27 +18,27 @@
             <div class="date">16 de junio, 2019</div>
           </div>
         </div>
-      <?php } ?>    
-      </div>
-      <div class="customArrow prevArrow"><i class="fas fa-chevron-left"></i></div>
-      <div class="customArrow nextArrow"><i class="fas fa-chevron-right"></i></div>
-    </section>
+      <?php } ?>
+    </div>
+    <div class="customArrow prevArrow"><i class="fas fa-chevron-left"></i></div>
+    <div class="customArrow nextArrow"><i class="fas fa-chevron-right"></i></div>
+  </section>
 
-    <section class="articles">
-      <div class="container">
-        <div class="items-list">          
-            <?php
-            $args = array(
-              'post_type' => 'post',
-              'post_per_page' => 9
-            );
-            $query = new WP_Query($args);
+  <section class="articles">
+    <div class="container">
+      <div class="items-list">
+        <?php
+        $args = array(
+          'post_type' => 'post',
+          'post_per_page' => 9
+        );
+        $query = new WP_Query($args);
 
-            if($query->have_posts()) : while($query->have_posts()): $query->the_post(); ?>
+        if ($query->have_posts()) : while ($query->have_posts()): $query->the_post(); ?>
 
             <div class="item">
               <div class="thumb">
-                <a href="<?php the_permalink(); ?>">    
+                <a href="<?php the_permalink(); ?>">
                   <?php if (has_post_thumbnail()): ?>
                     <?php the_post_thumbnail('medium'); ?>
                   <?php else: ?>
@@ -54,30 +54,32 @@
               </div>
             </div>
 
-            <?php endwhile; wp_reset_postdata(); endif; ?>                      
-        </div>
-        <a href="<?php echo get_option('home'); ?>/all-posts" class="readmore">Ver más artículos</a>
+        <?php endwhile;
+          wp_reset_postdata();
+        endif; ?>
       </div>
-    </section>
+      <a href="<?php echo get_option('home'); ?>/all-posts" class="readmore">Ver más artículos</a>
+    </div>
+  </section>
 
-    <section class="categorias">
-      <div class="container">
-        <nav>
-          <?php wp_nav_menu(array('menu' => 'Categorías')); ?>
-        </nav>
-      </div>
-    </section>
+  <section class="categorias">
+    <div class="container">
+      <nav>
+        <?php wp_nav_menu(array('menu' => 'Categorías')); ?>
+      </nav>
+    </div>
+  </section>
 
-    <section class="newsletter">
-      <div class="container">
-        <p>Suscríbete y recibe actualizaciones en tu correo electrónico</p>
-        <form>
-          <input type="" placeholder="Tu email">
-          <button>Enviar</button>
-        </form>
-      </div>
-    </section>
+  <section class="newsletter">
+    <div class="container">
+      <p>Suscríbete y recibe actualizaciones en tu correo electrónico</p>
+      <form>
+        <input type="" placeholder="Tu email">
+        <button>Enviar</button>
+      </form>
+    </div>
+  </section>
 
-  </main>
+</main>
 
 <?php get_footer(); ?>

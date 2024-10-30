@@ -1,0 +1,38 @@
+// Breakpoints as px values
+$breakpoints: (
+    'phone': 320px,
+    'tablet': 768px,
+    'tablet-landscape': 1024px,
+    'desktop': 1200px,
+    'large-desktop': 1200px,
+    'extra-large-desktop': 1284px
+);
+
+// Media query strings
+$media-queries: (
+    'phone': '(max-width: 1119px)',
+    'tablet-portrait': '(max-width: 767px)',
+    'tablet-landscape': '(min-width: 768px) and (max-width: 979px)',
+    'large-desktop': '(min-width: 1120px)',
+    'extra-large-desktop': '(min-width: 1400px)',
+    'non-retina': 'screen and (-webkit-max-device-pixel-ratio: 1)'
+);
+
+// Colors
+$orange: #9A7A14;
+$grey: #585858;
+$red: #D22800;
+$blue: #47586A;
+$swhite: #F5F5ED;
+$gold: #D8D4AE;
+$darkgold: #9A7A14;
+$lightgrey: #C2C2C2;
+$rosado: #EA6060;
+//borders
+$border : 1px solid rgba(255, 255, 255, 0.1);
+$bg-hour : rgba(234, 96, 96, 0.5);
+$bg-hour-hover: rgba(234, 96, 96, 0.8); 
+// Typography
+$op: 'Open Sans';
+$al: 'Alegreya';
+$als: 'Alegreya Sans';

@@ -1,3 +1,5 @@
+@use "../config" as *;
+
 footer {
     background: $grey;
     .container {
@@ -7,7 +9,7 @@ footer {
         grid-gap: 10px;
         color: $grey;
         padding: 12px;
-        @include respond-to($large-desktop) {
+        @include respond-to('large-desktop') {
             padding: 40px 0;
             grid-template-columns: 2fr 1fr 1fr 1fr 7fr;
         }
@@ -18,7 +20,7 @@ footer {
                     display: table;
                     margin: 0 auto;
                     max-width: 200px;
-                    @include respond-to($large-desktop) {
+                    @include respond-to('large-desktop') {
                         width: 100%;
                     }
                 }
@@ -28,7 +30,7 @@ footer {
                     height: 200px;
                     display: table;
                     margin: 0 auto;
-                    @include respond-to($large-desktop) {
+                    @include respond-to('large-desktop') {
                         width: 100%;
                         height: auto;
                     }
@@ -51,7 +53,7 @@ footer {
                         @include flex-wrap(wrap);
                         @include justify-content(center);
                         @include align-items(center);
-                        @include respond-to($large-desktop) {
+                        @include respond-to('large-desktop') {
                             @include justify-content(flex-start);
                         }
                     }
@@ -65,12 +67,12 @@ footer {
                             @include flex-wrap(wrap);
                             @include justify-content(flex-start);
                             @include align-items(center);
-                            @include respond-to($large-desktop) {
+                            @include respond-to('large-desktop') {
                                 @include justify-content(center);
                             }
                             li {
                                 margin: 0 15px 0 0;
-                                @include respond-to($phone) {
+                                @include respond-to('phone') {
                                     width: 100%;
                                     text-align: center;
                                     margin: 5px 0;
@@ -119,11 +121,11 @@ footer {
                         }
                     }
                     .social {
+                        color: #FFF;
                         @include flexbox;
                         @include flex-wrap(wrap);
                         @include justify-content(flex-start);
                         @include align-items(center);
-                        color: #FFF;
                         p {
                             font-family: $al;
                             font-size: 1.6rem;
