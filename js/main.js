@@ -63,6 +63,12 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
     buildSlots(config);
   });
 })(jQuery);
+function _toArray(r) { return _arrayWithHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 document.addEventListener("DOMContentLoaded", function () {
   var tooltip = document.createElement("div");
   tooltip.className = "footnote-tooltip";
@@ -71,68 +77,85 @@ document.addEventListener("DOMContentLoaded", function () {
     return window.innerWidth <= 1000;
   }
   function getFootnoteText(element) {
-    var parent = element.parentNode;
-    var clone = parent.cloneNode(true);
-    var footnoteNumber = clone.querySelector("a[id^=\"sdfootnote\"], a[id^=\"_ftn\"]");
-    if (footnoteNumber) footnoteNumber.remove();
-    var returnLinks = clone.querySelectorAll("a[href^=\"#sdfootnote\"], a[href^=\"#_ftnref\"]");
-    returnLinks.forEach(function (link) {
+    var _clone$querySelector, _clone$querySelector2;
+    var clone = element.parentNode.cloneNode(true);
+    (_clone$querySelector = clone.querySelector("a[id^=\"sdfootnote\"], a[id^=\"_ftn\"]")) === null || _clone$querySelector === void 0 || _clone$querySelector.remove();
+    clone.querySelectorAll("a[href^=\"#sdfootnote\"], a[href^=\"#_ftnref\"]").forEach(function (link) {
       return link.remove();
     });
-    var supElement = clone.querySelector("sup");
-    if (supElement) supElement.remove();
+    (_clone$querySelector2 = clone.querySelector("sup")) === null || _clone$querySelector2 === void 0 || _clone$querySelector2.remove();
     return clone.innerHTML.trim().replace(/^\s*\[\d+\]\s*/, "").replace(/^\s*\d+\s*/, "");
   }
   function positionTooltip(element, tooltip) {
     var rect = element.getBoundingClientRect();
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    var left = rect.left;
     var viewportWidth = window.innerWidth;
     var viewportHeight = window.innerHeight;
-    var tooltipWidth = tooltip.offsetWidth;
-    var tooltipHeight = tooltip.offsetHeight;
-    if (left + tooltipWidth > viewportWidth) {
-      left = viewportWidth - tooltipWidth - 20;
+    var left = Math.max(10, Math.min(rect.left, viewportWidth - tooltip.offsetWidth - 20));
+    var top = rect.bottom + scrollTop + 5;
+    if (rect.bottom + tooltip.offsetHeight > viewportHeight && rect.top > tooltip.offsetHeight) {
+      top = rect.top + scrollTop - tooltip.offsetHeight - 5;
     }
-    left = Math.max(10, left);
-    var spaceBelow = viewportHeight - rect.bottom;
-    var spaceAbove = rect.top;
-    var showAbove = spaceBelow < tooltipHeight && spaceAbove > tooltipHeight;
-    var top = showAbove ? rect.top + scrollTop - tooltipHeight - 5 : rect.bottom + scrollTop + 5;
-    tooltip.style.left = "".concat(left, "px");
-    tooltip.style.top = "".concat(top, "px");
+    Object.assign(tooltip.style, {
+      left: "".concat(left, "px"),
+      top: "".concat(top, "px")
+    });
   }
-  var footnoteLinks = document.querySelectorAll('.content-full sup a[href^="#sdfootnote"], .content-full a[href^="#_ftn"] sup');
-  footnoteLinks.forEach(function (link) {
-    var href = link.getAttribute("href") || link.parentNode.getAttribute("href");
-    var targetId = href.substring(1);
-    if (targetId.startsWith("sdfootnote")) {
-      targetId = targetId.replace("anc", "sym");
+  function insertExpandedNote(eventTarget, expandedNote) {
+    var supElement = eventTarget.closest("sup") || eventTarget.querySelector("sup");
+    var nextNode = (supElement || eventTarget).nextSibling;
+    if ((nextNode === null || nextNode === void 0 ? void 0 : nextNode.nodeType) === Node.TEXT_NODE && (nextNode.textContent.startsWith(".") || nextNode.textContent.startsWith(" "))) {
+      var _nextNode$textContent = _toArray(nextNode.textContent),
+        firstChar = _nextNode$textContent[0],
+        rest = _nextNode$textContent.slice(1);
+      var charNode = document.createTextNode(firstChar);
+      var restNode = document.createTextNode(rest.join(""));
+      nextNode.parentNode.replaceChild(charNode, nextNode);
+      charNode.parentNode.insertBefore(expandedNote, charNode.nextSibling);
+      expandedNote.parentNode.insertBefore(restNode, expandedNote.nextSibling);
+    } else {
+      (supElement || eventTarget).insertAdjacentElement("afterend", expandedNote);
     }
+  }
+
+  // Verificar si el elemento está después del separador de notas
+  var footnoteSeparator = document.querySelector(".wp-block-separator");
+  var isInFootnotes = function isInFootnotes(element) {
+    return (footnoteSeparator === null || footnoteSeparator === void 0 ? void 0 : footnoteSeparator.compareDocumentPosition(element)) & Node.DOCUMENT_POSITION_FOLLOWING;
+  };
+  document.querySelectorAll('a[href*="_ftn"], a[href*="sdfootnote"]').forEach(function (link) {
+    var href = link.getAttribute("href");
+    var targetId = href.substring(1).replace(/^sdfootnoteanc/, "sdfootnotesym");
     var footnoteContent = document.getElementById(targetId);
     if (!footnoteContent) return;
-    var eventTarget = link.tagName === "SUP" ? link.parentNode : link;
+    var isExpanded = false;
 
-    // Verificar si estamos en las notas al pie
-    var isInFootnotes = href.includes("_ftnref") || href.includes("sdfootnoteanc");
-    if (isMobile() && !isInFootnotes) {
-      eventTarget.addEventListener("click", function (e) {
+    // Links en la sección de notas al pie - funciona igual en mobile y desktop
+    if (isInFootnotes(link)) {
+      link.addEventListener("click", function (e) {
+        var targetRef = document.getElementById(href.replace("_ftn", "_ftnref").substring(1));
+        targetRef === null || targetRef === void 0 || targetRef.scrollIntoView({
+          behavior: "smooth"
+        });
+      });
+      return;
+    }
+    if (isMobile()) {
+      link.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        var nextElement = eventTarget.nextElementSibling;
-
-        // Si ya existe una nota expandida, la removemos
-        if (nextElement !== null && nextElement !== void 0 && nextElement.classList.contains("expanded-footnote")) {
-          nextElement.classList.add("removing");
-          nextElement.classList.remove("entering");
-          // Removemos después de la animación de opacidad
-          setTimeout(function () {
-            return nextElement.remove();
-          }, 200);
+        if (isExpanded) {
+          var note = document.querySelector(".expanded-footnote");
+          if (note) {
+            note.classList.add("removing");
+            note.classList.remove("entering");
+            setTimeout(function () {
+              return note.remove();
+            }, 200);
+          }
+          isExpanded = false;
           return;
         }
-
-        // Remover cualquier otra nota expandida
         document.querySelectorAll(".expanded-footnote").forEach(function (el) {
           el.classList.add("removing");
           el.classList.remove("entering");
@@ -140,26 +163,15 @@ document.addEventListener("DOMContentLoaded", function () {
             return el.remove();
           }, 200);
         });
-
-        // Crear y agregar la nueva nota
-        var noteText = getFootnoteText(footnoteContent);
         var expandedNote = document.createElement("div");
         expandedNote.className = "expanded-footnote";
-        expandedNote.innerHTML = noteText;
-
-        // Insertar después del eventTarget
-        eventTarget.insertAdjacentElement("afterend", expandedNote);
-
-        // Forzar reflow
-        expandedNote.offsetHeight;
-
-        // Iniciar animación de entrada
+        expandedNote.innerHTML = getFootnoteText(footnoteContent);
+        insertExpandedNote(link, expandedNote);
+        isExpanded = true;
         requestAnimationFrame(function () {
           expandedNote.classList.add("entering");
           expandedNote.style.maxHeight = expandedNote.scrollHeight + "px";
         });
-
-        // Evento click para cerrar
         expandedNote.addEventListener("click", function (e) {
           e.preventDefault();
           e.stopPropagation();
@@ -168,24 +180,22 @@ document.addEventListener("DOMContentLoaded", function () {
           setTimeout(function () {
             return expandedNote.remove();
           }, 200);
+          isExpanded = false;
         });
       });
-    } else if (!isMobile()) {
-      // Comportamiento desktop sin cambios
-      eventTarget.addEventListener("mouseover", function (e) {
-        var noteText = getFootnoteText(footnoteContent);
-        tooltip.innerHTML = noteText;
-        tooltip.style.display = "block";
-        positionTooltip(eventTarget, tooltip);
-      });
-      eventTarget.addEventListener("mouseout", function () {
-        tooltip.style.display = "none";
-      });
-      eventTarget.addEventListener("click", function (e) {
-        var target = document.getElementById(targetId);
-        if (target) {
+    } else {
+      Object.assign(link, {
+        onmouseover: function onmouseover(e) {
+          tooltip.innerHTML = getFootnoteText(footnoteContent);
+          tooltip.style.display = "block";
+          positionTooltip(link, tooltip);
+        },
+        onmouseout: function onmouseout() {
+          return tooltip.style.display = "none";
+        },
+        onclick: function onclick(e) {
           e.preventDefault();
-          target.scrollIntoView({
+          footnoteContent.scrollIntoView({
             behavior: "smooth"
           });
         }
@@ -194,52 +204,53 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 document.addEventListener("DOMContentLoaded", function () {
-  // Remover barras existentes
-  var existingBars = document.querySelectorAll(".progress-bar, .progress-bar-container");
+  var contentFull = document.querySelector(".content-full");
+
+  // If there's no content-full div, don't create the progress bar
+  if (!contentFull) {
+    return;
+  }
+
+  // Remove any existing progress bars
+  var existingBars = document.querySelectorAll(".progress-bar");
   existingBars.forEach(function (bar) {
-    var _bar$parentElement$ge;
-    if ((_bar$parentElement$ge = bar.parentElement.getAttribute("style")) !== null && _bar$parentElement$ge !== void 0 && _bar$parentElement$ge.includes("position: fixed")) {
-      bar.parentElement.remove();
-    } else {
-      bar.remove();
-    }
+    return bar.remove();
   });
 
-  // Obtener el ancho del viewport antes de crear la barra
-  var viewportWidth = window.visualViewport ? window.visualViewport.width : window.innerWidth;
-  console.log("Viewport width:", viewportWidth); // Debug
-
-  // Crear la barra con el ancho máximo establecido
+  // Create the progress bar
   var progressBar = document.createElement("div");
   progressBar.className = "progress-bar";
-  progressBar.style.maxWidth = "".concat(viewportWidth, "px");
   document.body.insertBefore(progressBar, document.body.firstChild);
   function updateProgressBar() {
+    // Get the content dimensions
+    var contentRect = contentFull.getBoundingClientRect();
+    var contentTop = contentRect.top + window.pageYOffset;
+    var contentHeight = contentRect.height;
+
+    // Calculate visible portion of the content
+    var viewportHeight = window.innerHeight;
+    var currentScroll = window.pageYOffset;
+
+    // Calculate progress based on content visibility
+    var progress = 0;
+    if (currentScroll > contentTop) {
+      // Calculate how much of the content has been scrolled past
+      var scrolledContent = currentScroll - contentTop;
+      // The viewable content height is the content height minus one viewport
+      var viewableContentHeight = contentHeight - viewportHeight;
+      // Calculate progress percentage
+      progress = scrolledContent / viewableContentHeight * 100;
+      // Ensure progress stays between 0 and 100
+      progress = Math.min(Math.max(progress, 0), 100);
+    }
     requestAnimationFrame(function () {
-      // Actualizar el ancho máximo en cada cambio
-      var currentViewportWidth = window.visualViewport ? window.visualViewport.width : window.innerWidth;
-      progressBar.style.maxWidth = "".concat(currentViewportWidth, "px");
-      var viewportHeight = window.innerHeight;
-      var totalScroll = document.documentElement.scrollHeight - viewportHeight;
-      var currentScroll = window.scrollY;
-      var progress = currentScroll / totalScroll * 100;
-
-      // Aplicar el progreso como porcentaje del viewport width
-      var progressWidth = currentViewportWidth * Math.min(progress, 100) / 100;
-      progressBar.style.width = "".concat(progressWidth, "px");
-
-      // Debug
-      console.log({
-        viewportWidth: currentViewportWidth,
-        progressWidth: progressWidth,
-        progress: "".concat(progress, "%")
-      });
+      progressBar.style.width = "".concat(progress, "%");
     });
   }
   var ticking = false;
   window.addEventListener("scroll", function () {
     if (!ticking) {
-      window.requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
         updateProgressBar();
         ticking = false;
       });
@@ -249,15 +260,11 @@ document.addEventListener("DOMContentLoaded", function () {
     passive: true
   });
 
-  // Actualizar cuando cambie el tamaño de la ventana
+  // Handle window resize and orientation changes
   window.addEventListener("resize", updateProgressBar);
   window.addEventListener("orientationchange", updateProgressBar);
 
-  // Usar VisualViewport API para mayor precisión en móviles
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", updateProgressBar);
-    window.visualViewport.addEventListener("scroll", updateProgressBar);
-  }
+  // Initial update
   updateProgressBar();
 });
 // remap jQuery to $
