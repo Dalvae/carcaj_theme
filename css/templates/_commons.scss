@@ -1,9 +1,9 @@
 @use "../config" as *;
 
 .container {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 10px;
     
     @include respond-to('tablet-landscape') {
         width: 100%;
