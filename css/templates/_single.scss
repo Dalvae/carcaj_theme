@@ -1,418 +1,424 @@
 @use "../config" as *;
 
 .progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 5px;
-    background: $red;
-    transition: width 0.5s ease-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 999999;
-    pointer-events: none;
-    max-width: 100vw;
-    overflow: hidden;
-    transform: translateZ(0);
-    will-change: width;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background: $red;
+  transition: width 0.5s ease-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 999999;
+  pointer-events: none;
+  max-width: 100vw;
+  overflow: hidden;
+  transform: translateZ(0);
+  will-change: width;
 }
 // Estilos para el tooltip
 .footnote-tooltip {
-    position: absolute;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 15px;
-    max-width: 600px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    font-family: $al;
-    font-size: 1.8rem;
-    line-height: 1.4;
-    color: $grey;
-    z-index: 1000;
-    display: none;
-    transition: opacity 0.2s ease-out;
-    margin: 5px;
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  max-width: 600px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-family: $al;
+  font-size: 1.8rem;
+  line-height: 1.4;
+  color: $grey;
+  z-index: 1000;
+  display: none;
+  transition: opacity 0.2s ease-out;
+  margin: 5px;
 
-    @include respond-to('large-desktop') {
-        max-width: 400px;
-        font-size: 2rem;
-    }
+  @include respond-to("large-desktop") {
+    max-width: 400px;
+    font-size: 2rem;
+  }
 
-    // Asegurarnos que sea visible en móvil
-    @media screen and (max-width: 768px) {
-        position: fixed;
-        bottom: 20px;
-        left: 20px !important;
-        right: 20px !important;
-        top: auto !important;
-        width: auto;
-        max-width: none;
-        margin: 0;
-    }
+  // Asegurarnos que sea visible en móvil
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    bottom: 20px;
+    left: 20px !important;
+    right: 20px !important;
+    top: auto !important;
+    width: auto;
+    max-width: none;
+    margin: 0;
+  }
 }
 .cited-text {
-    cursor: pointer;
-    color: inherit;
-    &:hover {
-        color: $blue; // O el color que prefieras
-        text-decoration: underline;
-    }
+  cursor: pointer;
+  color: inherit;
+  &:hover {
+    color: $blue; // O el color que prefieras
+    text-decoration: underline;
+  }
 }
 .expanded-footnote {
-    font-size: 1.8rem;
-    color: $grey;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 4px;
-    margin: 15px 0;
-    border-left: 3px solid $red;
-    overflow: hidden;
+  font-size: 1.8rem;
+  color: $grey;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+  margin: 15px 0;
+  border-left: 3px solid $red;
+  overflow: hidden;
+  opacity: 0;
+  max-height: 0;
+
+  // Clase para la animación de entrada
+  &.entering {
+    transition: max-height 0.2s ease-in-out, opacity 0.3s ease-out;
+    opacity: 1;
+  }
+
+  // Clase para la salida instantánea
+  &.removing {
+    transition: opacity 0.2s ease-out;
     opacity: 0;
     max-height: 0;
-
-    // Clase para la animación de entrada
-    &.entering {
-        transition: max-height 0.2s ease-in-out, opacity 0.3s ease-out;
-        opacity: 1;
-    }
-
-    // Clase para la salida instantánea
-    &.removing {
-        transition: opacity 0.2s ease-out;
-        opacity: 0;
-        max-height: 0;
-    }
+  }
 }
 
 @media (max-width: 1000px) {
-    .footnote-tooltip {
-        display: none !important;
-    }
+  .footnote-tooltip {
+    display: none !important;
+  }
 }
 main.single {
-    article {
-        a {
-        text-decoration: underline;
-        &:has(sup) {
-            text-decoration: none;
-        }
-        }
+  article {
+    a {
+      word-wrap: break-word; // Permite que las palabras se rompan
+      overflow-wrap: break-word; // Versión moderna de word-wrap
+      word-break: break-word; // Permite romper palabras en cualquier punto si es necesario
+      max-width: 100%; // Asegura que no exceda el contenedor
+      display: inline-block;
+      text-decoration: underline;
+      &:has(sup) {
+        text-decoration: none;
+      }
+    }
 
-        .top-post {
-            margin: 35px 0;
-            img {
-                width: 100%;
-                height: auto;
-                @include respond-to('large-desktop') {
-                    max-height: 600px;
-                    object-fit: cover;
-                }
-            }
-            p {
-                margin: 0;
-                padding: 10px 0 0;
-                color: $lightgrey;
-                font-size: 1.6rem;
-                text-align: right;
-            }
+    .top-post {
+      margin: 35px 0;
+      img {
+        width: 100%;
+        height: auto;
+        @include respond-to("large-desktop") {
+          max-height: 600px;
+          object-fit: cover;
         }
-        .content-post {
-            @include respond-to('large-desktop') {
-                // display: table;
-                width: 80%;
-                margin: 2rem auto;
-            }
-            .top {
-                color: $blue;
-                font-size: 2rem;
-                @include flexbox;
-                @include flex-wrap(wrap);
-                @include justify-content(space-between);
-                @include align-items(center);
-                .date {text-decoration: none;}
-                .categories {
-                    a {
-                        color: $blue;
-                        margin: 0 0 0 5px;
-                        &:hover {
-                            color: $gold;
-                        }
-                    }
-                }
-            }
-            h1.title-post {
-                color: $red;
-                font-family: $al;
-                font-size: 4rem;
-                font-weight: 500;
-                line-height: 1;
-                text-align: center;                
-                margin: 30px 0;
-                padding: 0;
-                @include respond-to('large-desktop') {
-                    font-size: 5.4rem;
-                    line-height: 1.2;
-                }
-            }
-            .authors {
-                color: $blue;
-                font-size: 2.2rem;
-                font-weight: 600;
-                text-align: center;
-            }
-            .content-full {
-                margin: 50px 0 0;
-                font-size: 2.4rem;
-                font-family: $al;
-                font-weight: 400;
-                line-height: 1.5;
-                p.has-small-font-size{
-                    font-size: 2rem;
-                }
-                sup {
-                    font-size: 2.5rem;
-                    vertical-align: baseline; // Alinea el elemento al inicio de la línea de base
-                    position: relative; // Necesario para usar top
-                    bottom: 0.2em;
-                    margin-left: 0.5rem;
-                    text-decoration: none!important;
-                    a {
-                        color: $red;
-                        text-decoration: none;                        
-                        &:hover {
-                            color: $gold;
-                        }
-                    }
-                }
-            
-            }
-            img.firma {
-                margin: 20px auto;
-                display: table;
-            }
-        }
+      }
+      p {
+        margin: 0;
+        padding: 10px 0 0;
+        color: $lightgrey;
+        font-size: 1.6rem;
+        text-align: right;
+      }
     }
-    .block-author {
-        background: $swhite;
-        .container {
-            padding: 40px 20px;
-            text-align: center;
-            @include respond-to('large-desktop') {
-                padding: 40px 0;
-            }
-            h2 {
-                color: $blue;
-                font-family: $als;
-                font-size: 3.6rem;
-                margin: 0 0 20px 0;
-                padding: 0;
-            }
-            .description {
-                color: $blue;
-                font-size: 2.8rem;
-                line-height: 1.2;
-            }
+    .content-post {
+      @include respond-to("large-desktop") {
+        // display: table;
+        width: 80%;
+        margin: 2rem auto;
+      }
+      .top {
+        color: $blue;
+        font-size: 2rem;
+        @include flexbox;
+        @include flex-wrap(wrap);
+        @include justify-content(space-between);
+        @include align-items(center);
+        .date {
+          text-decoration: none;
         }
+        .categories {
+          a {
+            color: $blue;
+            margin: 0 0 0 5px;
+            &:hover {
+              color: $gold;
+            }
+          }
+        }
+      }
+      h1.title-post {
+        color: $red;
+        font-family: $al;
+        font-size: 4rem;
+        font-weight: 500;
+        line-height: 1;
+        text-align: center;
+        margin: 30px 0;
+        padding: 0;
+        @include respond-to("large-desktop") {
+          font-size: 5.4rem;
+          line-height: 1.2;
+        }
+      }
+      .authors {
+        color: $blue;
+        font-size: 2.2rem;
+        font-weight: 600;
+        text-align: center;
+      }
+      .content-full {
+        margin: 50px 0 0;
+        font-size: 2.4rem;
+        font-family: $al;
+        font-weight: 400;
+        line-height: 1.5;
+        p.has-small-font-size {
+          font-size: 2rem;
+        }
+        sup {
+          font-size: 2.5rem;
+          vertical-align: baseline; // Alinea el elemento al inicio de la línea de base
+          position: relative; // Necesario para usar top
+          bottom: 0.2em;
+          margin-left: 0.5rem;
+          text-decoration: none !important;
+          a {
+            color: $red;
+            text-decoration: none;
+            &:hover {
+              color: $gold;
+            }
+          }
+        }
+      }
+      img.firma {
+        margin: 20px auto;
+        display: table;
+      }
     }
+  }
+  .block-author {
+    background: $swhite;
+    .container {
+      padding: 40px 20px;
+      text-align: center;
+      @include respond-to("large-desktop") {
+        padding: 40px 0;
+      }
+      h2 {
+        color: $blue;
+        font-family: $als;
+        font-size: 3.6rem;
+        margin: 0 0 20px 0;
+        padding: 0;
+      }
+      .description {
+        color: $blue;
+        font-size: 2.8rem;
+        line-height: 1.2;
+      }
+    }
+  }
 }
 
 .breadcrumbs {
-    color: #C2C2C2;
-    font-size: 2rem;
-    a {
-        color: #C2C2C2;
-        &:hover {
-            color: $gold;
-        }
+  color: #c2c2c2;
+  font-size: 2rem;
+  a {
+    color: #c2c2c2;
+    &:hover {
+      color: $gold;
     }
+  }
 }
 
 section.relatedPosts {
-    .container {
-        padding: 50px 0;
-        h2.title {
-            margin: 0 auto 20px;
-            padding: 0 0 2px 0;
-            font-size: 2.4rem;
-            font-family: $als;
-            font-weight: 500;
-            color: $red;
-            border-bottom: 1px solid $red;
-            text-transform: uppercase;
-            text-align: center;
-            display: table;
-        }
-        .itemsList {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-gap: 12px;
-            @include respond-to('large-desktop') {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .item {
-                .thumb {
-                    a {
-                        img {
-                            width: 100%;
-                            height: 250px;
-                            object-fit: cover;
-                        }
-                    }
-                }
-                .data {
-                    padding: 12px;
-                    .date {
-                        font-size: 2rem;
-                        color: $lightgrey;
-                    }
-                    h2 {
-                        margin: 0;
-                        padding: 10px 0;
-                        font-family: $al;
-                        font-size: 3.2rem;
-                        font-weight: 500;
-                        a {
-                            color: $red;
-                            &:hover {
-                                color: $darkgold;
-                            }
-                        }
-                    }
-                    .autor {
-                        font-size: 2rem;
-                        color: $blue;
-                        font-family: $al;
-                        font-style: italic;
-                    }
-                }
-            }
-        }
+  .container {
+    padding: 50px 0;
+    h2.title {
+      margin: 0 auto 20px;
+      padding: 0 0 2px 0;
+      font-size: 2.4rem;
+      font-family: $als;
+      font-weight: 500;
+      color: $red;
+      border-bottom: 1px solid $red;
+      text-transform: uppercase;
+      text-align: center;
+      display: table;
     }
+    .itemsList {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 12px;
+      @include respond-to("large-desktop") {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .item {
+        .thumb {
+          a {
+            img {
+              width: 100%;
+              height: 250px;
+              object-fit: cover;
+            }
+          }
+        }
+        .data {
+          padding: 12px;
+          .date {
+            font-size: 2rem;
+            color: $lightgrey;
+          }
+          h2 {
+            margin: 0;
+            padding: 10px 0;
+            font-family: $al;
+            font-size: 3.2rem;
+            font-weight: 500;
+            a {
+              color: $red;
+              &:hover {
+                color: $darkgold;
+              }
+            }
+          }
+          .autor {
+            font-size: 2rem;
+            color: $blue;
+            font-family: $al;
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
 }
 
 .comments {
-    background: $swhite;
-    .container {
-        padding: 20px;
-        @include respond-to('large-desktop') {
-            padding: 40px 0 40px 100px;
-        }        
-        h2.title-comments {
-            color: $blue;
-            font-size: 2.4rem;
-            font-family: $als;
-            text-transform: uppercase;
-        }
-        ul.comments-list {
-            margin: 0;
-            padding: 20px 0;
-            list-style: none;
-            border-top: 1px solid #979797;
-            li {
-                font-size: 2.4rem;
-                padding: 20px 0;
-                border-bottom: 1px solid #979797;
-                .comment-body {
-                    @include flexbox;
-                    @include flex-wrap(wrap);
-                    @include justify-content(space-between);
-                    @include align-items(flex-start);
-                    .comment-author {
-                        width: 35%;
-                        text-align: center;
-                        cite.fn {
-                            text-align: center;
-                            font-style: normal;
-                            font-weight: 800;
-                        }
-                    }
-                    .comment-text {
-                        width: 60%;
-                        p {
-                            margin: 0;
-                            padding: 0;
-                        }
-                    }
-                }
-            }
-        }
+  background: $swhite;
+  .container {
+    padding: 20px;
+    @include respond-to("large-desktop") {
+      padding: 40px 0 40px 100px;
     }
+    h2.title-comments {
+      color: $blue;
+      font-size: 2.4rem;
+      font-family: $als;
+      text-transform: uppercase;
+    }
+    ul.comments-list {
+      margin: 0;
+      padding: 20px 0;
+      list-style: none;
+      border-top: 1px solid #979797;
+      li {
+        font-size: 2.4rem;
+        padding: 20px 0;
+        border-bottom: 1px solid #979797;
+        .comment-body {
+          @include flexbox;
+          @include flex-wrap(wrap);
+          @include justify-content(space-between);
+          @include align-items(flex-start);
+          .comment-author {
+            width: 35%;
+            text-align: center;
+            cite.fn {
+              text-align: center;
+              font-style: normal;
+              font-weight: 800;
+            }
+          }
+          .comment-text {
+            width: 60%;
+            p {
+              margin: 0;
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 #respond {
-    h3#reply-title {
-        font-size: 2.4rem;
-        color: $blue;
-        text-transform: uppercase;
+  h3#reply-title {
+    font-size: 2.4rem;
+    color: $blue;
+    text-transform: uppercase;
+  }
+  form {
+    font-family: $als;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 12px;
+    @include respond-to("large-desktop") {
+      grid-template-columns: 1fr 1fr;
     }
-    form {
-        font-family: $als;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 12px;
-        @include respond-to('large-desktop') {
-            grid-template-columns: 1fr 1fr;
-        }
-        p {
-            margin: 0;
-            padding: 0;
-        }
-        input,
-        textarea {
-            width: 100%;
-            border: none;
-            padding: 12px;
-            background: #FFF;
-            resize: none;
-            outline: none;
-        }
-        input {
-            padding: 24px 12px;
-            margin: 0 24px 0 0;
-        }
-        textarea {
-            height: 230px;
-        }
-        p.comment-form-author,
-        p.comment-form-email {
-            margin: 0 0 24px 0;
-        }
-        p.comment-notes,
-        p.comment-form-url,
-        p.comment-form-cookies-consent,
-        label {
-            display: none;
-        }
-        input#submit {
-            font-family: $als;
-            font-weight: 600;
-            background: $darkgold;
-            color: #FFF;
-            text-align: center;
-            text-transform: uppercase;
-            &:hover {
-                background: $gold;
-                color: $darkgold;
-                cursor: pointer;
-            }
-        }
+    p {
+      margin: 0;
+      padding: 0;
     }
+    input,
+    textarea {
+      width: 100%;
+      border: none;
+      padding: 12px;
+      background: #fff;
+      resize: none;
+      outline: none;
+    }
+    input {
+      padding: 24px 12px;
+      margin: 0 24px 0 0;
+    }
+    textarea {
+      height: 230px;
+    }
+    p.comment-form-author,
+    p.comment-form-email {
+      margin: 0 0 24px 0;
+    }
+    p.comment-notes,
+    p.comment-form-url,
+    p.comment-form-cookies-consent,
+    label {
+      display: none;
+    }
+    input#submit {
+      font-family: $als;
+      font-weight: 600;
+      background: $darkgold;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      &:hover {
+        background: $gold;
+        color: $darkgold;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
-.printfriendly{
-    padding: 50px 0 0;    
-    a{        
-        color: $red !important;
-        font-size: 2rem !important;
-        font-family: $al;
-        display: table;
-        margin: 20px auto;
-        padding: 5px 8px;
-        border-radius: 2px;
-        &:hover{
-            background: $red;
-            color: #FFF !important;
-        }
+.printfriendly {
+  padding: 50px 0 0;
+  a {
+    color: $red !important;
+    font-size: 2rem !important;
+    font-family: $al;
+    display: table;
+    margin: 20px auto;
+    padding: 5px 8px;
+    border-radius: 2px;
+    &:hover {
+      background: $red;
+      color: #fff !important;
     }
+  }
 }

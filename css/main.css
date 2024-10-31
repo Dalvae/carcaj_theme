@@ -1156,6 +1156,11 @@ main.archive section h1.search {
   }
 }
 main.single article a {
+  word-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  display: inline-block;
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
@@ -1301,11 +1306,11 @@ main.single .block-author .container .description {
 }
 
 .breadcrumbs {
-  color: #C2C2C2;
+  color: #c2c2c2;
   font-size: 2rem;
 }
 .breadcrumbs a {
-  color: #C2C2C2;
+  color: #c2c2c2;
 }
 .breadcrumbs a:hover {
   color: #D8D4AE;
@@ -1456,7 +1461,7 @@ section.relatedPosts .container .itemsList .item .data .autor {
   width: 100%;
   border: none;
   padding: 12px;
-  background: #FFF;
+  background: #fff;
   resize: none;
   outline: none;
 }
@@ -1481,7 +1486,7 @@ section.relatedPosts .container .itemsList .item .data .autor {
   font-family: "Alegreya Sans";
   font-weight: 600;
   background: #9A7A14;
-  color: #FFF;
+  color: #fff;
   text-align: center;
   text-transform: uppercase;
 }
@@ -1505,7 +1510,7 @@ section.relatedPosts .container .itemsList .item .data .autor {
 }
 .printfriendly a:hover {
   background: #D22800;
-  color: #FFF !important;
+  color: #fff !important;
 }
 
 main.page section {

@@ -24,6 +24,13 @@ function updateConfigValue(content, key, value) {
 async function setup() {
   try {
     console.log("🚀 Iniciando setup del entorno de desarrollo...");
+    // Detener y limpiar contenedores Docker existentes
+    console.log("🔄 Deteniendo y limpiando contenedores Docker existentes...");
+    try {
+      execSync("docker-compose down -v", { stdio: "inherit" });
+    } catch (error) {
+      console.log("ℹ️  No hay contenedores previos para detener");
+    }
 
     // Verificar backup
     if (!fs.existsSync(CONFIG.backupDir)) {
@@ -136,15 +143,25 @@ COMPOSE_PROJECT_NAME=carcaj_theme
     fs.writeFileSync(CONFIG.envFile, envContent);
     console.log("📝 Archivo .env generado con la configuración");
 
+    // Iniciar contenedores Docker
+    console.log("\n🐳 Iniciando contenedores Docker...");
+    try {
+      execSync("docker-compose up -d", { stdio: "inherit" });
+      console.log("✅ Contenedores Docker iniciados correctamente");
+    } catch (error) {
+      throw new Error("Error al iniciar contenedores Docker: " + error.message);
+    }
+
     console.log("\n✅ Setup completado!");
-    console.log("Para iniciar el ambiente de desarrollo:");
-    console.log("1. Ejecuta: docker-compose down -v");
-    console.log("2. Ejecuta: docker-compose up -d");
-    console.log("3. Visita: http://localhost:8888");
+    console.log("\nPara continuar con el desarrollo:");
+    console.log("1. Ejecuta: pnpm dev");
+    console.log("2. Visita: http://localhost:8888");
   } catch (error) {
     console.error("❌ Error durante el setup:", error.message);
     process.exit(1);
   }
 }
+
+setup();
 
 setup();

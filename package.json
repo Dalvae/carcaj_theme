@@ -1,10 +1,13 @@
 {
-  "scripts": {
-    "setup": "node setup.js",
-    "dev": "gulp dev",
-    "build": "gulp build",
-    "clean": "gulp clear"
-  },
+  
+    "scripts": {
+      "setup": "node setup.js",
+      "start": "pnpm dev",
+      "dev": "gulp dev",
+      "build": "gulp build",
+      "clean": "docker-compose down -v && gulp clear && rm -rf temp node_modules .env",
+      "stop": "docker-compose down"
+    },
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
