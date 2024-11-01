@@ -350,18 +350,25 @@ section.relatedPosts {
     color: $blue;
     text-transform: uppercase;
   }
+  
   form {
     font-family: $als;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 12px;
-    @include respond-to("large-desktop") {
-      grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
+    .wrap-left, 
+    .wrap-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
+    
     p {
       margin: 0;
       padding: 0;
     }
+    
     input,
     textarea {
       width: 100%;
@@ -370,24 +377,34 @@ section.relatedPosts {
       background: #fff;
       resize: none;
       outline: none;
+      box-sizing: border-box;
+      font-family: $als; // Aseguramos misma fuente en todos los inputs
+      font-size: 16px; // Tamaño de fuente consistente
     }
-    input {
-      padding: 24px 12px;
-      margin: 0 24px 0 0;
-    }
+    
+    // Específicamente para el textarea
     textarea {
       height: 230px;
+      font-family: $als; // Redundante pero específico
+      &::placeholder {
+        font-family: $als; // También para el placeholder
+      }
     }
-    p.comment-form-author,
-    p.comment-form-email {
-      margin: 0 0 24px 0;
+    
+    input {
+      padding: 24px 12px;
+      &::placeholder {
+        font-family: $als; // También para los placeholders de inputs
+      }
     }
+    
     p.comment-notes,
     p.comment-form-url,
     p.comment-form-cookies-consent,
     label {
       display: none;
     }
+    
     input#submit {
       font-family: $als;
       font-weight: 600;
@@ -395,6 +412,7 @@ section.relatedPosts {
       color: #fff;
       text-align: center;
       text-transform: uppercase;
+      
       &:hover {
         background: $gold;
         color: $darkgold;

@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function insertExpandedNote(eventTarget, expandedNote) {
     var supElement = eventTarget.closest("sup") || eventTarget.querySelector("sup");
     var nextNode = (supElement || eventTarget).nextSibling;
-    if ((nextNode === null || nextNode === void 0 ? void 0 : nextNode.nodeType) === Node.TEXT_NODE && (nextNode.textContent.startsWith(".") || nextNode.textContent.startsWith(" "))) {
+    if ((nextNode === null || nextNode === void 0 ? void 0 : nextNode.nodeType) === Node.TEXT_NODE && (nextNode.textContent.startsWith(".") || nextNode.textContent.startsWith(",") || nextNode.textContent.startsWith(" "))) {
       var _nextNode$textContent = _toArray(nextNode.textContent),
         firstChar = _nextNode$textContent[0],
         rest = _nextNode$textContent.slice(1);

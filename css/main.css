@@ -1424,14 +1424,15 @@ section.relatedPosts .container .itemsList .item .data .autor {
 }
 #respond form {
   font-family: "Alegreya Sans";
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
-@media only screen and (min-width: 1120px) {
-  #respond form {
-    grid-template-columns: 1fr 1fr;
-  }
+#respond form .wrap-left,
+#respond form .wrap-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 #respond form p {
   margin: 0;
@@ -1445,17 +1446,28 @@ section.relatedPosts .container .itemsList .item .data .autor {
   background: #fff;
   resize: none;
   outline: none;
-}
-#respond form input {
-  padding: 24px 12px;
-  margin: 0 24px 0 0;
+  box-sizing: border-box;
+  font-family: "Alegreya Sans";
+  font-size: 16px;
 }
 #respond form textarea {
   height: 230px;
+  font-family: "Alegreya Sans";
 }
-#respond form p.comment-form-author,
-#respond form p.comment-form-email {
-  margin: 0 0 24px 0;
+#respond form textarea::-moz-placeholder {
+  font-family: "Alegreya Sans";
+}
+#respond form textarea::placeholder {
+  font-family: "Alegreya Sans";
+}
+#respond form input {
+  padding: 24px 12px;
+}
+#respond form input::-moz-placeholder {
+  font-family: "Alegreya Sans";
+}
+#respond form input::placeholder {
+  font-family: "Alegreya Sans";
 }
 #respond form p.comment-notes,
 #respond form p.comment-form-url,
