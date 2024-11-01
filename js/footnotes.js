@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (
       nextNode?.nodeType === Node.TEXT_NODE &&
       (nextNode.textContent.startsWith(".") ||
+        nextNode.textContent.startsWith(",") ||
         nextNode.textContent.startsWith(" "))
     ) {
       const [firstChar, ...rest] = nextNode.textContent;

@@ -11,20 +11,16 @@
                 <?php
                 $image = get_sub_field('imagen');
                 if (!empty($image)) :
-                  // thumbnail
-                  $size = 'large';
-                  $thumb = $image['sizes'][$size];
-                  $width = $image['sizes'][$size . '-width'];
-                  $height = $image['sizes'][$size . '-height'];
-                  if ($caption) : ?>
-                  <?php endif; ?>
-                  <img src="<?php echo $thumb; ?>" alt="<?php echo $alt; ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" />
+                  $imagen_url = $image['url'];
+                  $alt = $image['alt'] ?: '';
+                ?>
+                  <img src="<?php echo $imagen_url; ?>" alt="<?php echo $alt; ?>" />
                 <?php else : ?>
                   <img src="<?php bloginfo('template_url'); ?>/img/thumb.png" alt="">
                 <?php endif ?>
               </a>
             </div>
-            <div class="data coso">
+            <div class="data infotext">
               <h2><a href="<?php the_sub_field('enlace'); ?>"><?php the_sub_field('titulo'); ?></a></h2>
               <div class="extracto">
                 <p><?php the_sub_field('bajada'); ?></p>

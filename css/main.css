@@ -545,239 +545,219 @@ header .container .col:last-child {
   }
 }
 
-main.home section.destacados {
+.home .destacados {
   position: relative;
 }
-main.home section.destacados .sliderHome .row {
+.home .destacados .sliderHome .row {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  max-height: 70%;
   background: #f5f5ed;
 }
-main.home section.destacados .sliderHome .row .thumb {
-  align-self: center;
+.home .destacados .sliderHome .row .thumb {
   width: 100%;
+  align-self: center;
 }
-main.home section.destacados .sliderHome .row .thumb a {
+.home .destacados .sliderHome .row .thumb a {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
-main.home section.destacados .sliderHome .row .thumb a img {
-  align-self: center;
-  height: 100%;
-  max-height: 35rem;
+.home .destacados .sliderHome .row .thumb a img {
   width: 100%;
+  height: auto;
   -o-object-fit: cover;
      object-fit: cover;
 }
-main.home section.destacados .sliderHome .row .coso {
+.home .destacados .sliderHome .row .infotext {
   height: 35rem;
   align-self: stretch;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-top: 0rem;
+  margin: 0 1rem;
 }
-main.home section.destacados .sliderHome .row .coso h2 {
+.home .destacados .sliderHome .row .infotext h2 {
   font-size: 3.2rem;
   font-family: "Alegreya";
   font-weight: 500;
   line-height: 1.5;
   text-align: center;
-  padding: 0;
   margin: 0;
 }
-main.home section.destacados .sliderHome .row .coso h2 a {
+.home .destacados .sliderHome .row .infotext h2 a {
   color: #D22800;
-  text-align: center;
+  transition: color 0.3s ease;
 }
-main.home section.destacados .sliderHome .row .coso h2 a:hover {
+.home .destacados .sliderHome .row .infotext h2 a:hover {
   color: #D8D4AE;
 }
-main.home section.destacados .sliderHome .row .coso .extracto p {
+.home .destacados .sliderHome .row .infotext .extracto p {
   font-size: 2.6rem;
   line-height: 1.2;
 }
-main.home section.destacados .sliderHome .row .coso .date {
+.home .destacados .sliderHome .row .infotext .date {
   font-size: 2rem;
   text-align: center;
   margin: 0 3rem;
   color: #C2C2C2;
 }
 @media only screen and (min-width: 1120px) {
-  main.home section.destacados .sliderHome .row .thumb {
+  .home .destacados .sliderHome .row .thumb {
     flex: 1.8;
   }
-  main.home section.destacados .sliderHome .row .thumb a {
-    align-self: center;
-  }
-  main.home section.destacados .sliderHome .row .thumb a img {
+  .home .destacados .sliderHome .row .thumb a img {
     max-height: 50rem;
   }
-  main.home section.destacados .sliderHome .row .coso {
-    margin-top: 5rem;
-    margin-left: 10rem;
-    margin-right: 10rem;
+  .home .destacados .sliderHome .row .infotext {
+    margin: 5rem 10rem 0;
     flex: 1;
   }
 }
 @media only screen and (min-width: 1400px) {
-  main.home section.destacados .sliderHome .row .thumb a img {
-    max-height: 50rem;
-  }
-  main.home section.destacados .sliderHome .row .coso {
+  .home .destacados .sliderHome .row .infotext {
     flex: 1.2;
   }
 }
-main.home section.destacados .customArrow {
+.home .destacados .customArrow {
   position: absolute;
   top: 50%;
+  transform: translateY(-50%);
   color: #D22800;
   font-size: 2.5rem;
-  transform: translate(0, -50%);
+  transition: color 0.3s ease;
 }
-main.home section.destacados .customArrow:hover {
+.home .destacados .customArrow:hover {
   cursor: pointer;
   color: rgb(159, 30.2857142857, 0);
 }
-main.home section.destacados .customArrow.prevArrow {
+.home .destacados .customArrow.prevArrow {
   left: 5px;
 }
-main.home section.destacados .customArrow.nextArrow {
+.home .destacados .customArrow.nextArrow {
   right: 5px;
 }
-main.home section.articles .container {
-  padding-top: 1rem;
+.home .articles .container {
+  padding-top: 2rem;
 }
 @media only screen and (min-width: 1120px) {
-  main.home section.articles .container {
+  .home .articles .container {
     padding-top: 4rem;
   }
 }
-main.home section.articles .container h1 {
+.home .articles .container h1 {
   font-family: "Alegreya";
   font-size: 5.4rem;
   font-weight: 500;
   margin: 0 auto;
-  padding: 0 0 70px 0;
+  padding: 0 0 70px;
 }
-main.home section.articles .container h1.cat {
+.home .articles .container h1.cat {
   color: #47586A;
   text-align: center;
 }
-main.home section.articles .container h1.search {
+.home .articles .container h1.search {
   color: #D22800;
 }
-main.home section.articles .container .items-list {
-  padding: 0 0 90px 0;
+.home .articles .container .items-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding: 0 0 90px;
 }
-main.home section.articles .container .items-list .item {
+.home .articles .container .items-list .item {
   flex-basis: 100%;
   max-width: 100%;
   margin-bottom: 50px;
 }
 @media only screen and (min-width: 1120px) {
-  main.home section.articles .container .items-list .item {
+  .home .articles .container .items-list .item {
     flex-basis: calc(33.33% - 12px);
     max-width: 400px;
   }
 }
-main.home section.articles .container .items-list .item:hover .thumb a {
+.home .articles .container .items-list .item:hover .thumb a {
   opacity: 1.4;
 }
-main.home section.articles .container .items-list .item:hover .thumb a img {
+.home .articles .container .items-list .item:hover .thumb a img {
   filter: brightness(0.5);
 }
-main.home section.articles .container .items-list .item:hover .thumb .categories a {
-  opacity: 1; /* Mostrar cuando se hace hover */
+.home .articles .container .items-list .item:hover .thumb .categories a {
+  opacity: 1;
 }
-main.home section.articles .container .items-list .item .thumb {
-  position: relative;
+.home .articles .container .items-list .item .thumb {
   position: relative;
   display: block;
 }
-main.home section.articles .container .items-list .item .thumb a {
+.home .articles .container .items-list .item .thumb a {
   display: block;
 }
-main.home section.articles .container .items-list .item .thumb a img {
-  transition: filter 0.3s ease;
+.home .articles .container .items-list .item .thumb a img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   max-height: 200px;
+  transition: filter 0.3s ease;
 }
 @media only screen and (min-width: 1120px) {
-  main.home section.articles .container .items-list .item .thumb a img {
+  .home .articles .container .items-list .item .thumb a img {
     max-height: 250px;
     height: 250px;
   }
 }
-main.home section.articles .container .items-list .item .thumb .categories {
-  padding: 1rem;
+.home .articles .container .items-list .item .thumb .categories {
   position: absolute;
   bottom: 0;
   right: 0;
+  padding: 1rem;
 }
-main.home section.articles .container .items-list .item .thumb .categories a {
-  text-align: right;
-  align-self: flex-end;
-  margin: 0;
+.home .articles .container .items-list .item .thumb .categories a {
   font-family: "Alegreya";
   font-size: 3.2rem;
   font-weight: 400;
-  display: block;
-  align-items: end;
   color: rgb(255, 251, 251);
-  opacity: 0; /* Inicialmente oculto */
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
-main.home section.articles .container .items-list .item .thumb:hover .categories a {
-  opacity: 1; /* Mostrar cuando se hace hover */
-}
-main.home section.articles .container .items-list .item .data {
+.home .articles .container .items-list .item .data {
   padding: 12px;
 }
-main.home section.articles .container .items-list .item .data .date {
+.home .articles .container .items-list .item .data .date {
   font-size: 2rem;
   color: #C2C2C2;
 }
-main.home section.articles .container .items-list .item .data h2 {
-  margin: 0;
-  padding: 10px 0;
+.home .articles .container .items-list .item .data h2 {
   font-family: "Alegreya";
   font-size: 3.2rem;
   font-weight: 500;
+  margin: 0;
+  padding: 10px 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-main.home section.articles .container .items-list .item .data h2 a {
+.home .articles .container .items-list .item .data h2 a {
   max-width: 95%;
   color: #D22800;
+  transition: color 0.3s ease;
 }
-main.home section.articles .container .items-list .item .data h2 a:hover {
+.home .articles .container .items-list .item .data h2 a:hover {
   color: #9A7A14;
 }
-main.home section.articles .container .items-list .item .data .autor {
+.home .articles .container .items-list .item .data .autor {
   font-size: 2rem;
   color: #47586A;
   font-family: "Alegreya";
   font-style: italic;
 }
-main.home section.articles .container .items-list .item .data .extracto {
-  margin: 10px 0 0 0;
+.home .articles .container .items-list .item .data .extracto {
+  margin: 10px 0 0;
   font-size: 2.4rem;
   line-height: 1.5;
   color: #47586A;
 }
-main.home section.articles .container .items-list .item .data p {
+.home .articles .container .items-list .item .data p {
   font-size: 2.4rem;
   font-family: "Alegreya Sans";
   margin: 0;
@@ -785,32 +765,33 @@ main.home section.articles .container .items-list .item .data p {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-main.home section.articles .container .items-list .item .data.center {
+.home .articles .container .items-list .item .data.center {
   text-align: center;
 }
-main.home section.articles .container .items-list .item .data.center h2 a {
+.home .articles .container .items-list .item .data.center h2 a {
   color: #47586A;
 }
-main.home section.articles .container a.readmore {
+.home .articles .container .readmore {
   display: table;
   padding-bottom: 3rem;
   margin: 0 auto;
   font-size: 2.4rem;
   color: #47586A;
   text-transform: uppercase;
+  transition: color 0.3s ease;
 }
-main.home section.articles .container a.readmore:hover {
+.home .articles .container .readmore:hover {
   color: #9A7A14;
 }
-main.home section.categorias .container {
+.home .categorias .container {
   padding: 0 10px;
 }
 @media only screen and (min-width: 1120px) {
-  main.home section.categorias .container {
+  .home .categorias .container {
     padding: 0;
   }
 }
-main.home section.categorias .container nav ul {
+.home .categorias .container nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -819,41 +800,42 @@ main.home section.categorias .container nav ul {
   grid-gap: 12px;
 }
 @media only screen and (min-width: 1120px) {
-  main.home section.categorias .container nav ul {
+  .home .categorias .container nav ul {
     grid-template-columns: repeat(6, 2fr);
   }
 }
-main.home section.categorias .container nav ul li {
+.home .categorias .container nav ul li {
   font-size: 3.2rem;
   font-family: "Alegreya";
   font-style: italic;
 }
-main.home section.categorias .container nav ul li a {
+.home .categorias .container nav ul li a {
   padding: 20px 10px;
   display: block;
   color: #D22800;
   background: #D8D4AE;
   text-align: center;
+  transition: background-color 0.3s ease;
 }
-main.home section.categorias .container nav ul li a:hover {
+.home .categorias .container nav ul li a:hover {
   background: #D22800;
   color: #fff;
 }
-main.home section.newsletter {
+.home .newsletter {
   display: block;
   margin: 30px auto;
 }
-main.home section.newsletter .container {
+.home .newsletter .container {
   background: #47586A;
   color: #fff;
   padding: 20px;
 }
 @media only screen and (min-width: 1120px) {
-  main.home section.newsletter .container {
+  .home .newsletter .container {
     padding: 70px 200px;
   }
 }
-main.home section.newsletter .container p {
+.home .newsletter .container p {
   color: #C2C2C2;
   font-family: "Alegreya";
   font-weight: 600;
@@ -863,34 +845,34 @@ main.home section.newsletter .container p {
   padding: 0;
   text-align: center;
 }
-main.home section.newsletter .container form {
-  padding: 30px 0 0 0;
+.home .newsletter .container form {
+  padding: 30px 0 0;
 }
-main.home section.newsletter .container form {
+.home .newsletter .container form {
   display: flex;
 }
-main.home section.newsletter .container form {
+.home .newsletter .container form {
   flex-wrap: wrap;
 }
-main.home section.newsletter .container form {
+.home .newsletter .container form {
   -moz-justify-content: center;
   -ms-justify-content: center;
   justify-content: center;
   -ms-flex-pack: center;
 }
-main.home section.newsletter .container form {
+.home .newsletter .container form {
   -moz-align-items: center;
   -ms-align-items: center;
   align-items: center;
 }
-main.home section.newsletter .container form input {
+.home .newsletter .container form input {
   width: 600px;
   font-size: 1.6rem;
   padding: 10px;
   border: none;
   margin: 0 10px 0 0;
 }
-main.home section.newsletter .container form button {
+.home .newsletter .container form button {
   width: 200px;
   padding: 10px;
   font-size: 1.6rem;
@@ -898,8 +880,9 @@ main.home section.newsletter .container form button {
   border: none;
   color: #fff;
   text-transform: uppercase;
+  transition: background-color 0.3s ease;
 }
-main.home section.newsletter .container form button:hover {
+.home .newsletter .container form button:hover {
   cursor: pointer;
   background: rgb(199.425, 193.725, 139.575);
 }

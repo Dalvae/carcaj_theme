@@ -1,357 +1,345 @@
-@use "../config" as *;  
+@use "../config" as *;
 @use "sass:color";
 
-main.home {
-  section.destacados {
+// Variables
+$section-padding: 2rem;
+$large-section-padding: 4rem;
+
+// Mixins
+@mixin hover-transition($property: color) {
+  transition: $property 0.3s ease;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Main Styles
+.home {
+  // Featured Section
+  .destacados {
     position: relative;
+
     .sliderHome {
-        .row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            background: #f5f5ed;
+      .row {
+        @include flex-center;
+        flex-wrap: wrap;
+        max-height: 70%;
+        background: #f5f5ed;
 
-            .thumb {
-                align-self: center;
-                width: 100%;
+        .thumb {
+          width: 100%;
+          align-self: center;
 
-                a {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 100%;
-                    width: 100%;
-                    object-fit: cover;
-                    img {
-                        align-self: center;
-                        height: 100%;
-                        max-height: 35rem;
-                        width: 100%;
-                        object-fit: cover;
-                    }
-                }
+          a {
+            @include flex-center;
+            height: 100%;
+            width: 100%;
+
+            img {
+              width: 100%;
+              height: auto;
+              object-fit: cover;
             }
-
-            .coso {
-
-                height: 35rem;
-                align-self: stretch;
-                margin-left: 1rem;
-                margin-right: 1rem;
-                margin-top: 0rem;
-
-                h2 {
-                    font-size: 3.2rem;
-                    font-family: $al;
-                    font-weight: 500;
-                    line-height: 1.5;
-                    text-align: center;
-                    padding: 0;
-                    margin: 0;
-
-                    a {
-                        color: $red;
-                        text-align: center;
-
-                        &:hover {
-                            color: $gold;
-                        }
-                    }
-                }
-
-                .extracto {
-                  // margin-top: 6rem;
-                  // margin-bottom: 6rem;
-                  // margin-left: 20rem;
-                  // margin-right: 20rem;
-                    p {
-                        font-size: 2.6rem;
-                        line-height: 1.2;
-      
-                    }
-                }
-
-                .date {
-                    font-size: 2rem;
-                    text-align: center;
-                    margin: 0 3rem;
-                    color: $lightgrey;
-                }
-            }
-
-            @include respond-to('large-desktop') {
-                .thumb {
-                    flex: 1.8;
-
-                    a {
-                      img{
-                        max-height: 50rem;
-                      }
-                       
-                        align-self: center;
-                    }
-                }
-
-                .coso {
-                  margin-top: 5rem;
-                  margin-left: 10rem;
-                  margin-right: 10rem;
-                    flex: 1;  
-                }
-            }
-
-            @include respond-to('extra-large-desktop') {
-                .thumb {
-                    a {
-                      img{
-                        max-height: 50rem;
-                      }
-                    }
-                }
-
-                .coso {
-                    flex: 1.2;  
-                }
-            }
+          }
         }
+
+        .infotext {
+          height: 35rem;
+          align-self: stretch;
+          margin: 0 1rem;
+
+          h2 {
+            font-size: 3.2rem;
+            font-family: $al;
+            font-weight: 500;
+            line-height: 1.5;
+            text-align: center;
+            margin: 0;
+
+            a {
+              color: $red;
+              @include hover-transition;
+
+              &:hover {
+                color: $gold;
+              }
+            }
+          }
+
+          .extracto p {
+            font-size: 2.6rem;
+            line-height: 1.2;
+          }
+
+          .date {
+            font-size: 2rem;
+            text-align: center;
+            margin: 0 3rem;
+            color: $lightgrey;
+          }
+        }
+
+        @include respond-to("large-desktop") {
+          .thumb {
+            flex: 1.8;
+
+            a img {
+              max-height: 50rem;
+            }
+          }
+
+          .infotext {
+            margin: 5rem 10rem 0;
+            flex: 1;
+          }
+        }
+
+        @include respond-to("extra-large-desktop") {
+          .infotext {
+            flex: 1.2;
+          }
+        }
+      }
     }
 
     .customArrow {
-        position: absolute;
-        top: 50%;
-        color: $red;
-        font-size: 2.5rem;
-        transform: translate(0, -50%);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $red;
+      font-size: 2.5rem;
+      @include hover-transition;
 
-        &:hover {
-            cursor: pointer;
-            color: color.adjust($red, $lightness: -10%)
+      &:hover {
+        cursor: pointer;
+        color: color.adjust($red, $lightness: -10%);
+      }
 
-        }
-
-        &.prevArrow {
-            left: 5px;
-        }
-
-        &.nextArrow {
-            right: 5px;
-        }
+      &.prevArrow { left: 5px; }
+      &.nextArrow { right: 5px; }
     }
-}
+  }
 
-  section.articles {
+  // Articles Section
+  .articles {
     .container {
-      padding-top: 1rem;
-      @include respond-to('large-desktop') {
-        padding-top: 4rem;
+      padding-top: $section-padding;
+
+      @include respond-to("large-desktop") {
+        padding-top: $large-section-padding;
       }
 
       h1 {
-        // display: table;
         font-family: $al;
         font-size: 5.4rem;
         font-weight: 500;
         margin: 0 auto;
-        padding: 0 0 70px 0;
+        padding: 0 0 70px;
+
         &.cat {
           color: $blue;
           text-align: center;
         }
-        &.search {
-          color: $red;
-        }
+
+        &.search { color: $red; }
       }
+
       .items-list {
-        padding: 0 0 90px 0;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        padding: 0 0 90px;
+
         .item {
           flex-basis: 100%;
-           max-width: 100%;
+          max-width: 100%;
           margin-bottom: 50px;
-          @include respond-to('large-desktop') {
-            flex-basis: calc(33.33% - 12px); // 
+
+          @include respond-to("large-desktop") {
+            flex-basis: calc(33.33% - 12px);
             max-width: 400px;
           }
+
           &:hover {
             .thumb {
               a {
                 opacity: 1.4;
-                img {
-                  filter: brightness(0.5);
-                }
+                img { filter: brightness(0.5); }
               }
-              .categories {
-                a {
-                  opacity: 1; /* Mostrar cuando se hace hover */
-                }
-              }
+              .categories a { opacity: 1; }
             }
           }
+
           .thumb {
             position: relative;
-            position: relative;
             display: block;
+
             a {
               display: block;
+
               img {
-                transition: filter 0.3s ease;
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
                 max-height: 200px;
-                @include respond-to('large-desktop') {
+                @include hover-transition(filter);
+
+                @include respond-to("large-desktop") {
                   max-height: 250px;
                   height: 250px;
                 }
               }
             }
+
             .categories {
-              // display: flex;
-              // position: absolute;
-              padding: 1rem;
               position: absolute;
               bottom: 0;
               right: 0;
+              padding: 1rem;
+
               a {
-                text-align: right;
-                align-self: flex-end;
-                margin: 0;
-                // padding: 1rem;
                 font-family: $al;
                 font-size: 3.2rem;
                 font-weight: 400;
-                display: block;
-                align-items: end;
                 color: rgb(255, 251, 251);
-                // transition: opacity 0.3s;
-                opacity: 0; /* Inicialmente oculto */
-              }
-            }
-            &:hover .categories {
-              a {
-                opacity: 1; /* Mostrar cuando se hace hover */
+                opacity: 0;
+                @include hover-transition(opacity);
               }
             }
           }
+
           .data {
             padding: 12px;
-            
-            
+
             .date {
               font-size: 2rem;
               color: $lightgrey;
             }
+
             h2 {
-              margin: 0;
-              padding: 10px 0;
               font-family: $al;
               font-size: 3.2rem;
               font-weight: 500;
-              overflow: hidden;  
-              text-overflow: ellipsis;   
-              
+              margin: 0;
+              padding: 10px 0;
+              overflow: hidden;
+              text-overflow: ellipsis;
+
               a {
                 max-width: 95%;
                 color: $red;
-                &:hover {
-                  color: $darkgold;
-                }
+                @include hover-transition;
+
+                &:hover { color: $darkgold; }
               }
             }
+
             .autor {
               font-size: 2rem;
               color: $blue;
               font-family: $al;
               font-style: italic;
             }
+
             .extracto {
-              margin: 10px 0 0 0;
+              margin: 10px 0 0;
               font-size: 2.4rem;
               line-height: 1.5;
               color: $blue;
             }
+
             p {
               font-size: 2.4rem;
               font-family: $als;
               margin: 0;
               padding: 0;
-              overflow: hidden;  
-              text-overflow: ellipsis;  
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
+
             &.center {
               text-align: center;
-              h2 {
-                a {
-                  color: $blue;
-                }
-              }
+              h2 a { color: $blue; }
             }
           }
         }
       }
-      a.readmore {
+
+      .readmore {
         display: table;
         padding-bottom: 3rem;
         margin: 0 auto;
         font-size: 2.4rem;
         color: $blue;
         text-transform: uppercase;
-        &:hover {
-          color: $darkgold;
-        }
+        @include hover-transition;
+
+        &:hover { color: $darkgold; }
       }
     }
   }
-  section.categorias {
+
+  // Categories Section
+  .categorias {
     .container {
       padding: 0 10px;
-      @include respond-to('large-desktop') {
+
+      @include respond-to("large-desktop") {
         padding: 0;
       }
-      nav {
-        ul {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-gap: 12px;
-          @include respond-to('large-desktop') {
-            grid-template-columns: repeat(6, 2fr);
-          }
-          li {
-            font-size: 3.2rem;
-            font-family: $al;
-            font-style: italic;
-            a {
-              padding: 20px 10px;
-              display: block;
-              color: $red;
-              background: $gold;
-              text-align: center;
-              &:hover {
-                background: $red;
-                color: #fff;
-              }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 12px;
+
+        @include respond-to("large-desktop") {
+          grid-template-columns: repeat(6, 2fr);
+        }
+
+        li {
+          font-size: 3.2rem;
+          font-family: $al;
+          font-style: italic;
+
+          a {
+            padding: 20px 10px;
+            display: block;
+            color: $red;
+            background: $gold;
+            text-align: center;
+            @include hover-transition(background-color);
+
+            &:hover {
+              background: $red;
+              color: #fff;
             }
           }
         }
       }
     }
   }
-  section.newsletter {
+
+  // Newsletter Section
+  .newsletter {
     display: block;
     margin: 30px auto;
+
     .container {
       background: $blue;
       color: #fff;
       padding: 20px;
-      @include respond-to('large-desktop') {
+
+      @include respond-to("large-desktop") {
         padding: 70px 200px;
       }
+
       p {
         color: $lightgrey;
         font-family: $al;
@@ -362,12 +350,14 @@ main.home {
         padding: 0;
         text-align: center;
       }
+
       form {
-        padding: 30px 0 0 0;
+        padding: 30px 0 0;
         @include flexbox;
         @include flex-wrap(wrap);
         @include justify-content(center);
         @include align-items(center);
+
         input {
           width: 600px;
           font-size: 1.6rem;
@@ -375,6 +365,7 @@ main.home {
           border: none;
           margin: 0 10px 0 0;
         }
+
         button {
           width: 200px;
           padding: 10px;
@@ -383,9 +374,11 @@ main.home {
           border: none;
           color: #fff;
           text-transform: uppercase;
+          @include hover-transition(background-color);
+
           &:hover {
             cursor: pointer;
-            background: color.adjust($gold, $lightness: -10%)
+            background: color.adjust($gold, $lightness: -10%);
           }
         }
       }
