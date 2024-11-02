@@ -35,10 +35,10 @@
     </div>
     <div class="customArrow prevArrow"><svg class="icon">
         <use xlink:href="#icon-chevron-left"></use>
-      </svg></i></div>
+      </svg></div>
     <div class="customArrow nextArrow"><svg class="icon">
         <use xlink:href="#icon-chevron-right"></use>
-      </svg></i></div>
+      </svg></div>
   </section>
 
   <section class="articles">
