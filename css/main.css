@@ -1292,10 +1292,6 @@ main.single article .content-post .content-full sup a {
 main.single article .content-post .content-full sup a:hover {
   color: #D8D4AE;
 }
-main.single article .content-post img.firma {
-  margin: 20px auto;
-  display: table;
-}
 main.single .block-author {
   background: #F5F5ED;
 }
@@ -1539,6 +1535,73 @@ section.relatedPosts .container .itemsList .item .data .autor {
 .printfriendly a:hover {
   background: #D22800;
   color: #fff !important;
+}
+
+.social-share {
+  position: relative;
+  display: inline-block;
+}
+.social-share .icon-share {
+  cursor: pointer;
+  fill: #D22800;
+  transition: fill 0.3s ease;
+  height: 4rem;
+  width: 4rem;
+}
+.social-share .icon-share:hover {
+  fill: #D8D4AE;
+}
+.social-share .share-tooltip {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: translateX(10px);
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.social-share .share-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  border: 8px solid transparent;
+  border-right-color: white;
+  border-top-color: transparent;
+}
+.social-share .share-tooltip a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+.social-share .share-tooltip a .icon {
+  width: 24px;
+  height: 24px;
+  fill: #EA6060;
+  transition: fill 0.3s ease;
+}
+.social-share .share-tooltip a .icon:hover {
+  fill: #9A7A14;
+}
+.social-share.active .share-tooltip {
+  display: flex;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  flex-direction: row;
 }
 
 main.page section {

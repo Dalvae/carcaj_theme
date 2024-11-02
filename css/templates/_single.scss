@@ -192,8 +192,6 @@ main.single {
         }
       }
       img.firma {
-        margin: 20px auto;
-        display: table;
       }
     }
   }
@@ -437,4 +435,75 @@ section.relatedPosts {
       color: #fff !important;
     }
   }
+}
+.social-share {
+  position: relative;
+  display: inline-block;
+  
+  .icon-share {
+      cursor: pointer;
+      fill: $red;
+      transition: fill 0.3s ease;
+      height: 4rem;
+      width: 4rem;
+      &:hover {
+           fill: $gold;
+      }
+  }
+  
+  .share-tooltip {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      transform: translateX(10px);
+      background: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      display: none;  // Solo este display
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      
+      &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 100%;
+          transform: translateY(-50%);
+          border: 8px solid transparent;
+          border-right-color: white;
+          border-top-color: transparent;
+      }
+      
+      a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 5px;
+          text-decoration: none;  // Añadido para quitar el subrayado
+          
+          .icon {
+              width: 24px;
+              height: 24px;
+              fill: $rosado;
+              transition: fill 0.3s ease;
+              
+              &:hover {
+                  fill: $darkgold;
+              }
+          }
+      }
+  }
+  
+  &.active .share-tooltip {
+      display: flex;  // Aquí cambiamos a flex cuando está activo
+  }
+}
+.flex{
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  flex-direction: row;
 }
