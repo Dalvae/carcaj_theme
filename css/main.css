@@ -665,8 +665,8 @@ header .container .col:last-child {
 }
 .home .destacados .customArrow svg {
   fill: #D22800;
-  height: 5rem;
-  width: 5rem;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 .home .destacados .customArrow:hover {
   cursor: pointer;
