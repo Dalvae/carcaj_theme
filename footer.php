@@ -3,10 +3,14 @@
 			<div class="container">
 				<div class="col">
 					<div class="logogob">
-
+						<div class="logogob">
+							<img src="<?php bloginfo('template_url'); ?>/img/logo_gobierno.png" alt="">
+						</div>
 					</div>
 				</div>
-				<div class="col"></div>
+				<div class="col">
+
+				</div>
 				<div class="col">
 					<div class="logolom">
 						<img src="<?php bloginfo('template_url'); ?>/img/logolom.png" alt="">
@@ -25,8 +29,16 @@
 						</div>
 						<div class="social">
 							<p>síguenos como @revistacarcaj</p>
-							<a target="_blank" href="https://www.facebook.com/revistacarcaj/"><i class="fab fa-facebook-f"></i></a>
-							<a target="_blank" href="https://www.instagram.com/revista.carcaj/"><i class="fab fa-instagram"></i></a>
+							<a target="_blank" href="https://www.facebook.com/revistacarcaj/">
+								<svg class="icon">
+									<use xlink:href="#icon-facebook" />
+								</svg>
+							</a>
+							<a target="_blank" href="https://www.instagram.com/revista.carcaj/">
+								<svg class="icon">
+									<use xlink:href="#icon-instagram" />
+								</svg>
+							</a>
 						</div>
 					</div>
 					<div class="row">

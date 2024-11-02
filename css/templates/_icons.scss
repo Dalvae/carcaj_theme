@@ -1,0 +1,44 @@
+// _icons.scss - Guardar en ./templates/_icons.scss
+
+// Base icon styles
+%icon-base {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  fill: currentColor;
+}
+
+// Icon map with SVG data URLs
+
+
+// Generate icon classes
+
+
+// Icon sizes
+.icon {
+  &-sm {
+    width: 0.875em;
+    height: 0.875em;
+  }
+
+  &-lg {
+    width: 1.33em;
+    height: 1.33em;
+  }
+}
+
+// Icon colors and effects
+.icon {
+  &-white {
+    filter: invert(1);
+  }
+
+  &-hover-primary:hover {
+    filter: brightness(0) saturate(100%) invert(31%) sepia(98%) saturate(1000%)
+      hue-rotate(182deg) brightness(96%) contrast(101%);
+  }
+}

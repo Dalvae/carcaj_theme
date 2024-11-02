@@ -27,9 +27,10 @@
 @use "./templates/programacion";
 @use "./templates/aside";
 @use "./templates/footer";
+@use "./templates/icons";
 
 // External CSS imports
-@import "lib/fontawesome/css/all.css";
+// @import "lib/fontawesome/css/all.css";
 
 // Base HTML styles
 html {

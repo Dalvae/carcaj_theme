@@ -1,168 +1,184 @@
 @use "../config" as *;
 
 footer {
-    background: $grey;
-    .container {
-        padding: 40px 10px !important;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 10px;
-        color: $grey;
-        padding: 12px;
-        @include respond-to('large-desktop') {
-            padding: 40px 0;
-            grid-template-columns: 2fr 1fr 1fr 1fr 7fr;
-        }
-        .col {
-            color: #FFF;
-            .logogob {
-                img {
-                    display: table;
-                    margin: 0 auto;
-                    max-width: 200px;
-                    @include respond-to('large-desktop') {
-                        width: 100%;
-                    }
-                }
-            }
-            .logolom {
-                img {
-                    height: 200px;
-                    display: table;
-                    margin: 0 auto;
-                    @include respond-to('large-desktop') {
-                        width: 100%;
-                        height: auto;
-                    }
-                }
-            }
-            p {
-                font-size: 1.25rem;
-                &.small {
-                    font-family: $al;
-                    font-style: italic;
-                    font-size: 1rem;
-                    line-height: 1.6;
-                }
-            }
-            &:last-child {
-                .row {
-                    &.searchsocial {
-                        margin: 0 0 50px 0;
-                        @include flexbox;
-                        @include flex-wrap(wrap);
-                        @include justify-content(center);
-                        @include align-items(center);
-                        @include respond-to('large-desktop') {
-                            @include justify-content(flex-start);
-                        }
-                    }
-                    nav {
-                        margin: 0 0 50px 0;
-                        ul {
-                            list-style: none;
-                            margin: 0;
-                            padding: 0;
-                            @include flexbox;
-                            @include flex-wrap(wrap);
-                            @include justify-content(flex-start);
-                            @include align-items(center);
-                            @include respond-to('large-desktop') {
-                                @include justify-content(center);
-                            }
-                            li {
-                                margin: 0 15px 0 0;
-                                @include respond-to('phone') {
-                                    width: 100%;
-                                    text-align: center;
-                                    margin: 5px 0;
-                                }
-                                a {
-                                    display: block;
-                                    font-size: 2rem;
-                                    font-family: $al;
-                                    font-style: italic;
-                                    color: #FFF;
-                                    &:hover {
-                                        color: $orange;
-                                    }
-                                }
-                                ul.sub-menu{
-                                    display: none;
-                                }
-                            }
-                        }
-                    }
-                    .searchbox {
-                        margin: 0 30px 0 0;
-                        form {
-                            border-bottom: 1px solid #FFF;
-                            input {
-                                color: #FFF;
-                                background: none;
-                                border: none;
-                                outline: none;
-                                font-size: 1.6rem;
-                                font-family: $als;
-                                &::placeholder {
-                                    font-family: $al;
-                                }
-                            }
-                            button {
-                                border: none;
-                                background: none;
-                                color: #FFF;
-                                font-size: 1.6rem;
-                                &:hover {
-                                    color: $darkgold;
-                                    cursor: pointer;
-                                }
-                            }
-                        }
-                    }
-                    .social {
-                        color: #FFF;
-                        @include flexbox;
-                        @include flex-wrap(wrap);
-                        @include justify-content(flex-start);
-                        @include align-items(center);
-                        p {
-                            font-family: $al;
-                            font-size: 1.6rem;
-                            font-style: italic;
-                        }
-                        a {
-                            display: block;
-                            color: #FFF;
-                            margin: 0 0 0 15px;
-                            &:hover {
-                                color: $darkgold;
-                            }
-                        }
-                    }
-                    p.copyright {
-                        font-family: $al;
-                        font-size: 1.4rem;
-                        line-height: 1.3;
-                        a {
-                            color: #FFF;
-                            &:hover {
-                                color: $darkgold;
-                            }
-                        }
-                    }
-                }
-                .social {
-                    a {
-                        font-size: 2.5rem;
-                        color: $grey;
-                        margin: 0 0 0 10px;
-                        &:hover {
-                            color: $orange;
-                        }
-                    }
-                }
-            }
-        }
+  background: $grey;
+  .container {
+    padding: 40px 10px !important;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    color: $grey;
+    padding: 12px;
+    @include respond-to("large-desktop") {
+      padding: 40px 0;
+      grid-template-columns: 2fr 1fr 1fr 1fr 7fr;
     }
+    .col {
+      color: #fff;
+      .logogob {
+        img {
+          display: table;
+          margin: 0 auto;
+          max-width: 200px;
+          @include respond-to("large-desktop") {
+            width: 100%;
+          }
+        }
+      }
+      .logolom {
+        img {
+          height: 200px;
+          display: table;
+          margin: 0 auto;
+          @include respond-to("large-desktop") {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+      p {
+        font-size: 1.25rem;
+        &.small {
+          font-family: $al;
+          font-style: italic;
+          font-size: 1rem;
+          line-height: 1.6;
+        }
+      }
+      &:last-child {
+        .row {
+          &.searchsocial {
+            @include flexbox;
+            @include flex-wrap(wrap);
+            @include justify-content(space-between);
+            @include align-items(center);
+            @include respond-to("phone") {
+                @include justify-content(space-around);
+              }
+          }
+          nav {
+            margin: 0 0 50px 0;
+            ul {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+              
+              @include flexbox;
+              @include flex-wrap(wrap);
+              @include justify-content(space-around);
+              @include align-items(center);
+              @include respond-to("large-desktop") {
+                justify-content: space-between;
+              }
+              li {
+                margin: 0 15px 0 0;
+                @include respond-to("phone") {
+                  width: 100%;
+                  text-align: center;
+                  margin: 5px 0;
+                }
+                a {
+                  display: block;
+                  font-size: 2rem;
+                  font-family: $al;
+                  font-style: italic;
+                  color: #fff;
+                  &:hover {
+                    color: $orange;
+                  }
+                }
+                ul.sub-menu {
+                  display: none;
+                }
+              }
+            }
+          }
+          .searchbox {
+            margin: 0 30px 0 0;
+            form {
+              border-bottom: 1px solid #fff;
+              input {
+                color: #fff;
+                background: none;
+                border: none;
+                outline: none;
+                font-size: 1.6rem;
+                font-family: $als;
+                &::placeholder {
+                  font-family: $al;
+                }
+              }
+              button {
+                border: none;
+                background: none;
+                color: #fff;
+                font-size: 1.6rem;
+                &:hover {
+                  color: $darkgold;
+                  cursor: pointer;
+                }
+                .icon {
+                  fill: #fff;
+                  height: 1.6rem;
+                  width: 1.6rem;
+                }
+              }
+            }
+          }
+          .social {
+            color: #fff;
+            @include flexbox;
+            @include flex-wrap(wrap);
+            @include justify-content(flex-start);
+            @include align-items(center);
+            p {
+              font-family: $al;
+              font-size: 1.6rem;
+              font-style: italic;
+            }
+            a {
+              display: block;
+              fill: #fff;
+              margin: 0 0 0 15px;
+              &:hover {
+                fill: $darkgold;
+              }
+              .icon {
+                height: 2.6rem;
+                width: 2.6rem;
+               color: #fff;
+                ;
+              }
+            }
+          }
+          p.copyright {
+            font-family: $al;
+            font-size: 1.4rem;
+            line-height: 1.3;
+            a {
+              color: #fff;
+              &:hover {
+                color: $darkgold;
+              }
+            }
+          }
+          p.sites-list{
+            a{
+                color: #fff;
+            }
+          }
+        }
+        .social {
+          a {
+            font-size: 2.5rem;
+            color: $grey;
+            margin: 0 0 0 10px;
+            &:hover {
+              color: $orange;
+            }
+          }
+        }
+      }
+    }
+  }
 }
