@@ -112,6 +112,11 @@ $large-section-padding: 4rem;
       color: $red;
       font-size: 2.5rem;
       @include hover-transition;
+      svg{
+        fill:$red;
+        height: 5rem;
+        width: 5rem;
+      }
 
       &:hover {
         cursor: pointer;

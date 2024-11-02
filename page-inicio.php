@@ -33,8 +33,12 @@
       <?php endif; // if( get_field('to-do_lists') ): 
       ?>
     </div>
-    <div class="customArrow prevArrow"><i class="fas fa-chevron-left"></i></div>
-    <div class="customArrow nextArrow"><i class="fas fa-chevron-right"></i></div>
+    <div class="customArrow prevArrow"><svg class="icon">
+        <use xlink:href="#icon-chevron-left"></use>
+      </svg></i></div>
+    <div class="customArrow nextArrow"><svg class="icon">
+        <use xlink:href="#icon-chevron-right"></use>
+      </svg></i></div>
   </section>
 
   <section class="articles">
